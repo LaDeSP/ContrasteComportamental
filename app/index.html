@@ -1,0 +1,31 @@
+<html>
+<head> 
+    <script src="phaser/phaser.js"></script>
+    <script src="teste_sequencial.js"></script>
+    <script type="text/javascript">     
+        var pontos = 1;   
+        //document.getElementById("myText") = "Parabéns! Você recebeu um ponto";
+        function limpaTxt(){
+            document.getElementById("pontuacao").innerHTML = pontos;  
+            document.getElementById("myText").innerHTML = " ";
+            pontos++;
+        }
+    </script>
+</head>
+<body  onload="limpaTxt()">  
+       
+
+    <div
+   style="
+      top: 0;
+      left: 820;
+      position: absolute;
+      z-index: 1;
+      visibility: show;">
+<h1>Pontos:  <span id="pontuacao"></span></h1>
+<h2>  <span id="myText"></span> </h2>
+<button id="unButton" onclick="limpaTxt(), escondeB()">Coletar Pontos</button> 
+</div>
+
+</body>
+</html>
