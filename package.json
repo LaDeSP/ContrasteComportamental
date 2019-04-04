@@ -1,7 +1,7 @@
 {
   "name": "contraste-comportamental",
   "version": "1.0.1",
-  "description": "Primeiro programa testando esta paradinha top demais do phaser com o electron mto bom, obg mãe, obg pai",
+  "description": "Programa teste para modo sequencial com componentes estaticos",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
