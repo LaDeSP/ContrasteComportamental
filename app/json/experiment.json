@@ -1,0 +1,16 @@
+{ 
+    "program": "alternado",
+    "message": "Teste alternado",
+    "training_time": "30000",
+    "game_time": "100000",
+    "collect_time":"4000", 
+    "COD": "1000",
+    "ICI": "1500",
+    "show_score_interval": "2000",
+    "score_show": "2000",
+    "negative_point": "false",
+    "fase_list": {
+        "sequence": "A && B",
+        "componentA_color": "red"
+    }
+}
