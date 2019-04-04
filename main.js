@@ -1,5 +1,32 @@
 const electron = require('electron')
 
+var resposta;
+
+
+var fs = require('fs'),
+  path = require('path')
+  filePath = path.join(__dirname+'/app/json', 'experiment.json' );
+console.log(__dirname);
+fs.readFile(filePath, {encoding: 'utf-8'}, function(req,response){
+  if (!req) {
+
+    resposta = JSON.parse(response);
+    console.log(resposta);
+  } else {
+    
+    console.log(req);
+  }
+});
+
+
+
+
+
+
+
+//console.log(obj);
+//var obj = JSON.parse(text);
+//console.log(obj);
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
