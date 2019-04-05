@@ -1,14 +1,6 @@
-module.exports{
-time: function(){
-    //função pra iniciar um contador 
-    
-
-
-
-
+module.exports = {
+    timer_generator: function()
+    {
+        //Will return time
+    }
 };
-
-
-
-
-}
