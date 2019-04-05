@@ -1,3 +1,4 @@
+
 var vi_numero = require('./gera_vi.js')
 
 
@@ -26,7 +27,7 @@ var vermelho = "#0FF0000";
 
 function preload(){
     this.load.setBaseURL('http://127.0.0.1:8000/')
-    this.load.image('componente', 'app/image/circulo-mario.png');
+    this.load.image('componente', 'app/image/mario-semfundo1.png');
 
 }
 
@@ -47,7 +48,8 @@ var componente = {
 
 
 function create(){
-    
+    console.clear();
+    timer(2000000);
     componente.show = this.physics.add.image(400, 300, 'componente').setInteractive()
     
     console.log(componente.vi_novo);
@@ -59,7 +61,7 @@ function create(){
 
         componente.show.on('pointerdown', function (pointer){
             this.setTint(vermelho);
-            componente.clickCount_show++;
+            componente.click_A++;
             componente.clickCount++;
         });
             
@@ -79,18 +81,20 @@ function create(){
         onEvent_red();
 
             setInterval(onEvent_red(), 1500);
-            setInterval(console.log(componente.clickCount + "\n" + componente.click_A + "cliques no VERMELHO"), 2000);
+            
 
             setInterval(function(){
-                console.log(componente.clickCount + "\n" + componente.click_A + "cliques no VERMELHO");
-                }, 3000);
+                console.log(componente.clickCount + " Cliques durante o teste\n" + componente.click_A + " cliques no VERMELHO")
+            }, 3000);
+
+
+
+
         }
 
 
     function onEvent_red (){         
-        componente.clickCount_showR = componente.clickCount_showA;
-        componente.click_A = componente.click_A + componente.clickCount_;
-        clickCount_exibicao = 0;
+        
         document.body.style.background = "red";
     }
     
@@ -104,3 +108,19 @@ function create(){
         this.time.delayedCall(6000, onEvent_red, [], this);
     }*/
 
+function timer(fase_time){
+    
+    fase_time-=3000
+    setInterval(function(){
+        console.log("\n" + fase_time);
+        fase_time -= 3000;
+        if(fase_time == 0){
+            document.write("FIM DO TESTE");
+        }
+    }, 3000);
+    setInterval(function(){
+        console.clear();
+        console.log("\n\nTROCA COMPONENTE\n\n");
+        
+    }, 30000);
+}
