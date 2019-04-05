@@ -38,7 +38,7 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 768, height: 432})
+  mainWindow = new BrowserWindow({width: 1200, height: 768})
   mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/app/index.html`)

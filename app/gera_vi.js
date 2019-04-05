@@ -1,8 +1,9 @@
 
 
 
-
-function gera_vi()//está função devolve um valor do vi especifico
-{
-    return 3.10;
-}
+module.exports = {
+    gera_vi: function()//está função devolve um valor do vi especifico
+    {
+        return 3.10;
+    }
+};
