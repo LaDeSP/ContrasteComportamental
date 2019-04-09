@@ -1,13 +1,13 @@
 
 module.exports = {
     gera_vi: function(vi=[]){//está função devolve um valor do vi especifico
-      if(vis[0]==undefined){
-        var vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
+      if(vi[0]==undefined){
+        vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
         vi=module.exports.embaralha(vi);//embaralha aqui
         return vi;
       }
       else{
-        intervalo=module.exports.gera_intervalo(vi);
+        var intervalo=module.exports.gera_intervalo(vi);
         return intervalo;
       }
       
