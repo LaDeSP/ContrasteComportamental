@@ -1,13 +1,21 @@
 
 module.exports = {
     gera_vi: function(vi=[]){//está função devolve um valor do vi especifico
-      var vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
-      vi=module.exports.embaralha(vi);//embaralha aqui
-      return vi;
+      if(vis[0]==undefined){
+        var vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
+        vi=module.exports.embaralha(vi);//embaralha aqui
+        return vi;
+      }
+      else{
+        intervalo=module.exports.gera_intervalo(vi);
+        return intervalo;
+      }
+      
     },
     gera_intervalo: function(vi=[]){//está função devolve um valor do vi especifico
       var indice=Math.floor((Math.random() * 10));
       var retorna= vi[indice];console.log(retorna);
+      module.exports.remove_da_lista(vis,retorna);
       return retorna;
     },
     load_lista : function(){//carrega o json para as variaveis
@@ -55,7 +63,7 @@ module.exports = {
           j++;
         }
       }
-      return temp;
+      vi=temp;
     }
 };
 
