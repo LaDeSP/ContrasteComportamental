@@ -2,6 +2,9 @@ var vi_num = require('./gera_vi.js')
 var experimentParam = require('./le_experiment')
 
 
+experimentParam = experimentParam.le_exeperimet();
+
+
 var config = {
     type: Phaser.AUTO,
     width: 1200,
@@ -21,8 +24,6 @@ var config = {
 
 var game = new Phaser.Game(config);
 
-var component_time = 15000;
-
 function preload(){
     this.load.setBaseURL('http://127.0.0.1:8000/')
     this.load.image('componente', 'app/image/Capivara.png');
@@ -32,38 +33,41 @@ function preload(){
 
 var componentA = {
     type: "componente",
-    color: "red",
+    color: experimentParam.faseA.componentA_color,
     click: 0, // cliques totais no componente A
     //click_B: 0, //cliques totais no componente B
-    vi_novo: vi_num.gera_vi() //recebe novo valor de intervalo
+    vi: vi_num.gera_vi() //recebe novo valor de intervalo
 };
 var componentB = {
     type: "componente",
-    color: "red",
+    color: experimentParam.faseA.componentB_color,
     click: 0, // cliques totais no componente A
     //click_B: 0, //cliques totais no componente B
-    vi_new: vi_num.gera_vi()
+    vi: vi_num.gera_vi()
 };
 
 var component_selector = {
     click: 0, // cliques totais no componente A
     show: null,
+    point: 0
     //click_B: 0, //cliques totais no componente B
 };
 
 function create(){
-    document.body.style.background = "green";
-    component_selector.show = this.physics.add.image(300, 600, 'componente').setInteractive()
+    document.body.style.background = componentB.color;
+    component_selector.show = this.physics.add.image(400, 300, 'componente').setInteractive()
     component_selector.show.body.allowGravity = false;//Anula a gravidade para que o objto não se mova
 
     component_selector.show.on('pointerdown', function (pointer){
-        this.setTint();
+        
         component_selector.click++;
-        if(document.body.style.background == "red"){
-            componentA.click++;            
+        if(document.body.style.background == componentA.color){
+            componentA.click++;   
+            this.setTint('#FF0000');
         }
-        if(document.body.style.background == "green"){
+        if(document.body.style.background == componentB.color){
             componentB.click++;
+            this.setTint('#008000');
         }
     });
         
@@ -80,22 +84,35 @@ function create(){
         
     });
     changeToRed();
+
+    showScore();
 }
 
-
+function showScore(){
+    setInterval(function(){
+        document.body.getElementById(score).style.display = 'block';
+        setTimeout(function(){}, experimentParam.score_show);
+        hideScore();
+    }, experimentParam.show_score_interval);
+}
+function hideScore(){
+    setInterval(function(){
+        document.body.getElementById(score).style.display = 'none';
+        showScore();
+    }, experimentParam.show_score_interval);
+}
 
 function changeToRed(){
     setInterval(function(){
-        document.body.style.background = "red"
+        document.body.style.background = componentA.color
         changeToGreen();
-    }, component_time);
+    }, experimentParam.component_time);
 }
 
 function changeToGreen(){
     setInterval(function(){
-        document.body.style.background = "green"
+        document.body.style.background = componentB.color
         changeToRed();
-    }, component_time);
-    
+    }, experimentParam.component_time); 
 
 }

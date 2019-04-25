@@ -6,14 +6,15 @@
     "collect_time":"4000", 
     "COD": "1000",
     "ICI": "1500",
-    "show_score_interval": "2000",
-    "score_show": "2000",
+    "show_score_interval": "10000",
+    "score_show": "3000",
     "negative_point": "false",
     "component_time": "15000",
     "faseA": {
         "sequence": "A && B",
         "componentA_color": "red",
-    },
+        "componentB_color": "green"
+    }
     
     
 }
