@@ -1,6 +1,5 @@
-
-var vi_numero = require('./gera_vi.js')
-
+var vi_num = require('./gera_vi.js')
+var experimentParam = require('./le_experiment')
 
 
 var config = {
@@ -21,106 +20,82 @@ var config = {
 };//Define as configurações do tamanho do phaser dentro da janela.
 
 var game = new Phaser.Game(config);
-var verde = "#000FF00";
-var vermelho = "#0FF0000";
 
+var component_time = 15000;
 
 function preload(){
     this.load.setBaseURL('http://127.0.0.1:8000/')
-    this.load.image('componente', 'app/image/mario-semfundo1.png');
+    this.load.image('componente', 'app/image/Capivara.png');
 
 }
 
 
-var componente = {
+var componentA = {
     type: "componente",
     color: "red",
-    clickCount: 0, //Quantidade total de cliques(independente de cor) 
-    click_A: 0, // cliques totais no componente A
+    click: 0, // cliques totais no componente A
     //click_B: 0, //cliques totais no componente B
-    clickCount_showA: 0, //Cliques no componente A durante cada tempo de exibição
-    //clickCount_showB: 0, //Cliques no componente B durante cada tempo de exibição
-    tempo_exibicao: 60,
-    tempo_total: 0,
-    vi_novo: vi_numero.gera_vi(),
-    show: 0,
+    vi_novo: vi_num.gera_vi() //recebe novo valor de intervalo
+};
+var componentB = {
+    type: "componente",
+    color: "red",
+    click: 0, // cliques totais no componente A
+    //click_B: 0, //cliques totais no componente B
+    vi_new: vi_num.gera_vi()
 };
 
+var component_selector = {
+    click: 0, // cliques totais no componente A
+    show: null,
+    //click_B: 0, //cliques totais no componente B
+};
 
 function create(){
-    console.clear();
-    timer(2000000);
-    componente.show = this.physics.add.image(400, 300, 'componente').setInteractive()
-    
-    console.log(componente.vi_novo);
-     //Cria um objeto interativo
-        
-     document.body.style.background = "red";
-        componente.show.body.allowGravity = false;//Anula a gravidade para que o objto não se mova
-        console.log(componente.tempo_exibicao);
+    document.body.style.background = "green";
+    component_selector.show = this.physics.add.image(300, 600, 'componente').setInteractive()
+    component_selector.show.body.allowGravity = false;//Anula a gravidade para que o objto não se mova
 
-        componente.show.on('pointerdown', function (pointer){
-            this.setTint(vermelho);
-            componente.click_A++;
-            componente.clickCount++;
-        });
-            
-        componente.show.on('pointerup', function (pointer) {
-            
-           this.clearTint();
-            
-        });
-            
-        componente.show.on('pointerout', function (pointer) {
-            
-            this.clearTint();
-            
-        });
-        
-
-        onEvent_red();
-
-            setInterval(onEvent_red(), 1500);
-            
-
-            setInterval(function(){
-                console.log(componente.clickCount + " Cliques durante o teste\n" + componente.click_A + " cliques no VERMELHO")
-            }, 3000);
-
-
-
-
+    component_selector.show.on('pointerdown', function (pointer){
+        this.setTint();
+        component_selector.click++;
+        if(document.body.style.background == "red"){
+            componentA.click++;            
         }
-
-
-    function onEvent_red (){         
-        
-        document.body.style.background = "red";
-    }
-    
-    /*function onEvent_green (){  
-        console.log(componente.clickCount + " cliques totais \n" + componente.click_B + "cliques no VERDE");
-        componente.clickCount_showG = componente.clickCount_showB;
-        componente.click_B = componente.click_B + componente.clickCount_exibicao;
-        clickCount_exibicao = 0;
-        document.body.style.background = "green";
-        
-        this.time.delayedCall(6000, onEvent_red, [], this);
-    }*/
-
-function timer(fase_time){
-    
-    fase_time-=3000
-    setInterval(function(){
-        console.log("\n" + fase_time);
-        fase_time -= 3000;
-        if(fase_time == 0){
-            document.write("FIM DO TESTE");
+        if(document.body.style.background == "green"){
+            componentB.click++;
         }
-    }, 3000);
-    setInterval(function(){
-        console.clear();
-        console.log("\n\nTROCA COMPONENTE\n\n");
+    });
         
-    }, 30000);
+    component_selector.show.on('pointerup', function (pointer) {
+        console.log("\n\n\n", componentA.click, "\n\n\n", componentB.click)
+        console.log(document.body.style.background)
+       this.clearTint();
+        
+    });
+        
+    component_selector.show.on('pointerout', function (pointer) {
+        
+        this.clearTint();
+        
+    });
+    changeToRed();
+}
+
+
+
+function changeToRed(){
+    setInterval(function(){
+        document.body.style.background = "red"
+        changeToGreen();
+    }, component_time);
+}
+
+function changeToGreen(){
+    setInterval(function(){
+        document.body.style.background = "green"
+        changeToRed();
+    }, component_time);
+    
+
 }
