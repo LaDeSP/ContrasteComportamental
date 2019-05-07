@@ -7,15 +7,15 @@ module.exports = {
 
 
     if(vi[0]===undefined){
-      //console.log("carrega");
       vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
       vi=module.exports.embaralha(vi);//embaralha aqui
+      console.log("vi carregado:",vi);
     }
 
     interval=module.exports.gera_intervalo(vi,interval);
     vi=module.exports.remove_da_lista(vi,interval);
-    //console.log("vi depois:",vi);
-    //console.log("interval:",interval);
+    console.log("vi:",vi);
+    console.log("interval:",interval);
     return interval;
   },
   gera_intervalo: function(vi){//está função devolve um valor do vi especifico
@@ -25,21 +25,23 @@ module.exports = {
     return returns;
   },
   load_lista : function(){//carrega o json para as variaveis
-      var resposta;
+      var archive;
       var fs = require('fs'),
       path = require('path')
       filePath = path.join(__dirname+'/json', 'lista.json' );
       //console.log(__dirname);
       try {
-        var fsResposta = fs.readFileSync(filePath)
-        var resposta = JSON.parse(fsResposta);
+        var fsarchive = fs.readFileSync(filePath)
+        var archive = JSON.parse(fsarchive);
       } catch (error) {
         return false;
       }
+      var max =archive.VI.vi20.tamanho;
+      console.log("max:",max);
       var i;
       var list= [];
-      for(i=0;i<10;i++){
-          list[i]=resposta.vi[i];
+      for(i=0;i<max;i++){
+          list[i]=archive.VI.vi20.vi[i];
       }
       return list;
   },
