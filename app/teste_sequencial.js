@@ -169,7 +169,7 @@ function pointCheck(){ //Verifica o clique ao final do contador de VI do compone
                     
             componentB.vi = vi_num.gera_vi();
             console.log("\nColetou ponto no componente B.\n pontuação total em B é = ", componentB.score, "\n\n")
-            console.log("\n novo valor do componente B é : ", componentB.vi)
+            console.log("\n novo valor do componente B e : ", componentB.vi)
             console.log("\nquantidade de cliques em B : ", componentB.click)
             pontuaFlag == false;
         }
