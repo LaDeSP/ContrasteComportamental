@@ -9,13 +9,13 @@ module.exports = {
     if(vi[0]===undefined){
       vi=module.exports.load_lista();//isso talvez não deve ficar em definitivo aqui
       vi=module.exports.embaralha(vi);//embaralha aqui
-      console.log("vi carregado:",vi);
+      //console.log("vi carregado:",vi);
     }
 
     interval=module.exports.gera_intervalo(vi,interval);
     vi=module.exports.remove_da_lista(vi,interval);
-    console.log("vi:",vi);
-    console.log("interval:",interval);
+    //console.log("vi:",vi);
+    //console.log("interval:",interval);
     return interval;
   },
   gera_intervalo: function(vi){//está função devolve um valor do vi especifico
@@ -37,7 +37,7 @@ module.exports = {
         return false;
       }
       var max =archive.VI.vi20.tamanho;
-      console.log("max:",max);
+      //console.log("max:",max);
       var i;
       var list= [];
       for(i=0;i<max;i++){
@@ -57,7 +57,8 @@ module.exports = {
     }
     return vi;
   },
-  remove_da_lista :function(vi, returns){//remove o item usado da lista    
+  remove_da_lista :function(vi, returns){//remove o item usado da lista
+    //melhorar a função
     var i;
     var j=0;
     var temp=[];
