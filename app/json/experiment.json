@@ -1,19 +1,26 @@
-{ 
-    "program": "alternado",
-    "message": "Teste alternado",
-    "training_time": "30000",
-    "game_time": "100000",
-    "collect_time":"4000", 
-    "COD": "1000",
-    "ICI": "1500",
-    "show_score_interval": "5000",
-    "score_show": "3000",
-    "negative_point": "false",
-    "component_time": "5000",
-    "faseA": {
-        "sequence": "A && B",
-        "componentA_color": "red",
-        "componentB_color": "green"
-    }    
-}
-
+{
+    "program":"alternado",
+    "message":"Teste alternado",
+    "training_time":"30000",
+    "game_time":"100000",
+    "collect_time":"4000",
+    "COD":"1000",
+    "ICI":"1500",
+    "show_score_interval":"10000",
+    "score_show":"3000",
+    "negative_point":"false",
+    "component_time":"15000",
+    "number_of_phases":1,
+    "phases":[
+        {
+            "number_of_cycles":16,
+            "interval_time":0,
+            "fase":"A",
+            "sequence":"A && B",
+            "componentA_color":"red",
+            "componentA_vi":"20",
+            "componentB_color":"green",
+            "componentB_vi":"40"
+        }
+    ]
+ }
