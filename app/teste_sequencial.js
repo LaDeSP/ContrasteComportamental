@@ -10,9 +10,9 @@ var changeTimerA;
 var changeA = experimentParam.component_time;
 var changeTimerB;
 var changeB = experimentParam.component_time;
+experimentColor = experimentParam;
 experimentParam = experimentParam.le_exeperimet();
-
-modalShow();
+var phaseNum = 0;
 
 var pontuaFlag = false;
 
@@ -43,21 +43,21 @@ var elem = new Event('color');
 
 var componentA = { //variável do tipo componente
     type: "componente",
-    color: experimentParam.faseA.componentA_color,
+    color: experimentColor.componentA(phaseNum),
     click: 0, // cliques totais no componente A
     //click_B: 0, //cliques totais no componente B
-    vi: 3000,//vi_num.gera_vi(), //recebe novo valor de intervalo
+    vi:vi_num.gera_vi_componentA(), //recebe novo valor de intervalo
     score: 0
 };
 var componentB = { //variável do tipo componente
     type: "componente",
-    color: experimentParam.faseA.componentB_color,
+    color: experimentColor.componentB(phaseNum),
     click: 0, // cliques totais no componente A
     //click_B: 0, //cliques totais no componente B
-    vi: 3000,//vi_num.gera_vi(),
+    vi: vi_num.gera_vi_componentB(),
     score: 0
 };
-
+/*  */
 var component_selector = {
     click: 0, // cliques totais no componente A
     show: null,
@@ -80,7 +80,7 @@ function create(){ //Cria a cena com um componente
             if(document.body.style.background == componentA.color){                
                 modalShow();
                 component_selector.flag_A = 0;
-                componentA.vi = vi_num.gera_vi();
+                componentA.vi = vi_num.gera_vi_componentA();
                 timersOn();
             }
         }
@@ -88,7 +88,7 @@ function create(){ //Cria a cena com um componente
             if(document.body.style.background == componentB.color){                
                 modalShow();
                 component_selector.flag_B = 0;
-                componentB.vi = vi_num.gera_vi();
+                componentB.vi = vi_num.gera_vi_componentB();
                 timersOn();
             }
         }
@@ -115,6 +115,7 @@ function create(){ //Cria a cena com um componente
         
     });
     console.clear();
+    console.log(experimentParam.component_time);
     console.log("\n valor do Componente A:\n", componentA.vi ,"\nvalor do componente B\n", componentB.vi);
     componentChange();
      //Inicia o looping para a troca dos componentes a partir da background color
@@ -172,24 +173,24 @@ function pontua(){   //A cada troca de cor, o contador de VI de cada componente 
             clearInterval(timer_B); //Pausa o timer do outro componente            
                 timer_A = setInterval(function(){
                     if(componentA.vi>0)
-                        componentA.vi = componentA.vi - 10;
+                        componentA.vi = componentA.vi - 1;
                     else{
                         component_selector.flag_A = 1;
                         clearInterval(timer_A);
                     } 
-                }, 10);            
+                }, 1);            
         }
         
         if(document.body.style.background == componentB.color){     
             clearInterval(timer_A);//Pausa o timer do outro componente
             timer_B = setInterval(function(){
                 if(componentB.vi>0)
-                    componentB.vi = componentB.vi - 10;
+                    componentB.vi = componentB.vi - 1;
                 else{
                     component_selector.flag_B = 1;
                     clearInterval(timer_B);
                 } 
-            }, 10);
+            }, 1);
         }
         console.clear();
         console.log("\n valor do Componente A:\n", componentA.vi ,"\nvalor do componente B\n", componentB.vi); 

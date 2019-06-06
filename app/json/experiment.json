@@ -9,7 +9,7 @@
     "show_score_interval":"10000",
     "score_show":"3000",
     "negative_point":"false",
-    "component_time":"15000",
+    "component_time":"3000",
     "number_of_phases":1,
     "phases":[
         {

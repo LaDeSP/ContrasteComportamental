@@ -1,5 +1,5 @@
 module.exports = {
-exports.le_exeperimet = function() {
+ le_exeperimet :function() {
     var resposta;
 
     var fs = require('fs'),
@@ -16,7 +16,8 @@ exports.le_exeperimet = function() {
   },
   componentA:function(index_phase){
     let experiment=module.exports.le_exeperimet();
-    let color=experiment.phases[index_phase].componentA_color
+    let color=experiment.phases[index_phase].componentA_color;
+    console.log(color);
     return color
   },
   componentB:function(index_phase){
