@@ -1,3 +1,4 @@
+module.exports = {
 exports.le_exeperimet = function() {
     var resposta;
 
@@ -12,4 +13,15 @@ exports.le_exeperimet = function() {
       return false;
     }
     return resposta;
+  },
+  componentA:function(index_phase){
+    let experiment=module.exports.le_exeperimet();
+    let color=experiment.phases[index_phase].componentA_color
+    return color
+  },
+  componentB:function(index_phase){
+    let experiment=module.exports.le_exeperimet();
+    let color=experiment.phases[index_phase].componentB_color
+    return color
   }
+}
