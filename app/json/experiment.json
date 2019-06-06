@@ -9,10 +9,11 @@
     "show_score_interval": "5000",
     "score_show": "3000",
     "negative_point": "false",
-    "component_time": "15000",
+    "component_time": "5000",
     "faseA": {
         "sequence": "A && B",
         "componentA_color": "red",
         "componentB_color": "green"
     }    
 }
+

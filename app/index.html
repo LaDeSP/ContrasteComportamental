@@ -1,8 +1,13 @@
 <html>
 <head> 
-    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+       
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="modal/jquery.min.js"></script>
     <script src="phaser/phaser.js"></script>
     <script src="teste_sequencial.js"></script>
+    
 </head>
 <body >  
        
@@ -13,17 +18,28 @@
       left: 820;
       position: absolute;
       z-index: 1;
-      display: show;"> Placar: </div>
-      <div id="pointsGet"
-      style="
-         top: 0;
-         left: 820;
-         position: absolute;
-         z-index: 1;
-         display: show;"></div>
+      display: show;"></div>
 <h1></h1>
 <h2></h2>
-
+ 
+      <!-- Modal -->
+      <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" style="top: 450; left: 0;">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"></h5>
+                  
+                </div>
+                <div class="modal-body">
+                  <p>Parabéns! Você ganhou um ponto</p>
+                </div>
+                <div class="modal-footer">
+                  <button id="coletaPts" type="button" class="btn btn-primary" data-dismiss="modal" onclick="clicaModal()" >Coletar Ponto</button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
 
 </body>
 </html>
