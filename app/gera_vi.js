@@ -4,13 +4,12 @@ var index_phase=0;
 var number_of_phases_componentA;
 var interval_componentB=0;
 var vi_componentB = [];
-var index_phase=0;
 var number_of_phases_componentB;
 module.exports = {
   gera_vi_componentA: function(){//está função devolve um valor do vi especifico
 
     if(vi_componentA[0]===undefined){
-      vi_componentA=module.exports.carries_lista_componentA();//isso talvez não deve ficar em definitivo aqui
+      vi_componentA=module.exports.carries_lista_componentA();//isso talvez não deve ficar em definitivo aqui //olhando aqui
       vi_componentA=module.exports.embaralha(vi_componentA);//embaralha aqui
     }
     interval_componentA=module.exports.gera_intervalo(vi_componentA,interval_componentA);//talvez tenha problema
@@ -24,8 +23,8 @@ module.exports = {
   },
   carries_lista_componentA : function(){//carrega o json para as variaveis
     var lista=module.exports.return_lista();
-    var vi_componentA=module.exports.define_vi_cpA(index_phase);
-    var vi_used=module.exports.load_vi_componentA(lista)//vi_used//_componentA
+    var vi_used=module.exports.define_vi_cpA(index_phase);
+    var vi_componentA=module.exports.load_vi_componentA(vi_used,lista)//vi_used//_componentA
     var max=module.exports.max_of_vi(vi_used,lista)
     return module.exports.interval_list(lista,vi_used);
   },
@@ -43,20 +42,18 @@ module.exports = {
     var max_of_vi=lista
     var vi_usado=['VI.vi',vi_used,'.tamanho']
     vi_usado=vi_usado.join('')
-    vi_usado = vi_usado.split('.')
+    vi_usado = vi_usado.split('.')   
     vi_usado.forEach((item) => {
       max_of_vi = max_of_vi[item]
     })
     return max_of_vi
 
   },
-  load_vi_componentA: function(lista){//func em teste
-    var experiment=module.exports.load_experiment()
+  load_vi_componentA: function(interval,lista){//func em teste  
     var vi_used = lista 
-    var vi_usado =['VI.vi',experiment.phases[index_phase].componentA_vi]
+    var vi_usado =['VI.vi',interval]
     vi_usado=vi_usado.join('')
-        vi_usado += '.tamanho'
-        vi_usado = vi_usado.split('.')
+    vi_usado = vi_usado.split('.')
     vi_usado.forEach((item) => {
       vi_used = vi_used[item]
     })
@@ -129,26 +126,22 @@ module.exports = {
   },
   carries_lista_componentB : function(){//carrega o json para as variaveis
     var lista=module.exports.return_lista();
-    var vi_componentB=module.exports.define_vi_cpA(index_phase);
-    var vi_used=module.exports.load_vi_componentB(lista)//vi_used//_componentB
+    var vi_used=module.exports.define_vi_cpB(index_phase);
+    var vi_componentA=module.exports.load_vi_componentB(vi_used,lista)//vi_used//_componentA
     var max=module.exports.max_of_vi(vi_used,lista)
     return module.exports.interval_list(lista,vi_used);
   },
-  load_vi_componentB: function(lista){//func em teste
-    var experiment=module.exports.load_experiment()
+  load_vi_componentB: function(interval,lista){//func em teste  
     var vi_used = lista 
-
-    var vi_usado =['VI.vi',experiment.phases[index_phase].componentB_vi]
+    var vi_usado =['VI.vi',interval]
     vi_usado=vi_usado.join('')
-        vi_usado += '.tamanho'
-        vi_usado = vi_usado.split('.')
-        //aqui
+    vi_usado = vi_usado.split('.')
     vi_usado.forEach((item) => {
       vi_used = vi_used[item]
     })
     return vi_used
   },
-  define_vi_cpA : function(fase){ //devolve o vi usado no teste no componete 1 //func em teste
+  define_vi_cpB : function(fase){ //devolve o vi usado no teste no componete 1 //func em teste
     var experiment=module.exports.load_experiment();
     number_of_phases=experiment.number_of_phases
     return experiment.phases[fase].componentB_vi
