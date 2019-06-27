@@ -5,14 +5,18 @@ var number_of_phases_componentA;
 var interval_componentB=0;
 var vi_componentB = [];
 var number_of_phases_componentB;
+var used_viA=[];
+var used_viB=[];
+var list_used_vi=[];
 module.exports = {
   gera_vi_componentA: function(){//está função devolve um valor do vi especifico
 
     if(vi_componentA[0]===undefined){
-      vi_componentA=module.exports.carries_lista_componentA();//isso talvez não deve ficar em definitivo aqui //olhando aqui
+      vi_componentA=module.exports.carries_lista_componentA();//isso talvez não deve ficar em definitivo aqui
       vi_componentA=module.exports.embaralha(vi_componentA);//embaralha aqui
     }
-    interval_componentA=module.exports.gera_intervalo(vi_componentA,interval_componentA);//talvez tenha problema
+    interval_componentA=module.exports.gera_intervalo(vi_componentA,interval_componentA);
+    used_viA+=interval_componentA;
     vi_componentA=module.exports.remove_da_lista(vi_componentA,interval_componentA);
     return interval_componentA;
   },
@@ -121,6 +125,7 @@ module.exports = {
       vi_componentB=module.exports.embaralha(vi_componentB);//embaralha aqui
     }
     interval_componentB=module.exports.gera_intervalo(vi_componentB,interval_componentB);//talvez tenha problema
+    used_viB+=interval_componentB;    
     vi_componentB=module.exports.remove_da_lista(vi_componentB,interval_componentB);
     return interval_componentB;
   },
@@ -148,8 +153,33 @@ module.exports = {
   },
   change_phase: function(){
     if (index_phase<number_of_phases){
+      module.exports.stores_gera_vi();
       index_phase+=1;
     }
+  },
+  remove_the_last :function(vi){//remove o item usado da lista
+    var i;
+    var temp=[];
+    len=vi.length;
+    for(i=0;i<len-1;i++){
+      temp[i]=vi[i];
+    }
+    return temp;
+  },
+  stores_gera_vi: function(){//função em teste
+    let temp=[];
+    used_viA=module.exports.remove_the_last(used_viA)
+    used_viB=module.exports.remove_the_last(used_viB)
+    temp={
+      "intervals":{
+        "componentA":[used_viA],
+        "componentB":[used_viB]
+      }
+    }
+    list_used_vi.push(temp)
+  },
+  report_intervals: function(){
+    module.exports.stores_gera_vi();
+    return list_used_vi
   }
 };
-
