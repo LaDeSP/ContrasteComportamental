@@ -1,40 +1,50 @@
 {
-    "TestType" : "altenado",//Tipo de teste "altenado" ou "silmultaneo"
     "TrainingTime" : "180000",//Tempo de treino em milisegundos padrão 3 minutos
-    "TestTime" : "600000",//Tempo do teste em milisegundos padrão 10 minutos//gametime/*verificar se ainda vai existir*/
-    "PointsPerTask" : "10",//Pontos por tarefa//verifica000r o que é
-    "CollectTime": "4000",//Tempo para coleta de dados em milisegundos padrão 4 segundos
-    "COD" : "1000",//Change Over Delay(COD) em milisegundos padrão 4 segundos/*só usado com teste concorrente*/
-    "ICI" : "1500",//Tempo entre Componentes(ICI) em milisegundos padrão 1,5 segundos
-    "ShowScoreInterval" : "10000",//Tempo entre exibições do placar em milisegundos padrão 10 segundos
-    "ScoreShow" : "3000",//Tempo de exibição do placar em milisegundos padrão 3 segundos
-    //definição de ativação pontos positivos e negativos: false desataivo e true ativo
-    //Componente A
-    "PositivePointsCompA" : true,//ativação pontos positivos Componente A
-    "NegativePointsCompA" : false,//ativação pontos negativos Componente A
-    //Componente B
-    "PositivePointsCompB" : true,//ativação pontos positivos Componente B
-    "NegativePointsCompB" : false,//ativação pontos negativos Componente B    
-    //configuração dos Componentes
-    "NumberOfStages" : "1", //Numero de fases
-    "ComponentTime": "15000",//Tempo de cada componente
-    "Stages":[//padrao das fases
+    "TestSet" : {//Propriedades de execução do teste
+        "TestType" : "altenado",//Tipo de teste "altenado" ou "silmultaneo"
+        "TestTime" : "600000",//Tempo do teste em milisegundos padrão 10 minutos//gametime/*verificar se ainda vai existir*/
+        "CollectTime": "4000",//Tempo para coleta de dados em milisegundos padrão 4 segundos
+        "COD" : "1000",//Change Over Delay(COD) em milisegundos padrão 4 segundos/*só usado com teste concorrente*/
+        "ICI" : "1500",//Tempo entre Componentes(ICI) em milisegundos padrão 1,5 segundos
+        "ShowScoreInterval" : "10000",//Tempo entre exibições do placar em milisegundos padrão 10 segundos
+        "ScoreShow" : "3000",//Tempo de exibição do placar em milisegundos padrão 3 segundos
+        "PointsPerTask" : "10",//Pontos por tarefa
+    },
+    "StagesSet": {//Configuração das fases
+        "NumberOfStages" : "1", //Numero de fases
+        "ComponentTime" : "15000",//Tempo de cada componente
+        "OrderOfConditions" : "A-A",//Odem de execução das condições ao longo do teste//Sempre usar "-" para separar a ordem das condições
+    },
+    "Stages" : [//Propriedades das fases
             {
-                "Condição" : "A",//nome para essa leva do teste
+                "Condition" : "A",//nome para essa condição do teste
                 "NumberOfCycles" : "16",//Numero de cilcos da fase
-                "IntervalTime" : "0",//Intervalo entre comps
-                //CompA
-                "ComponentAColor" : "red",//cor do Componente A
-                "ComponentAVi+" : "20",//lista de intervalos com reconpensas positivas do Componente A
-                "ComponentAVi-" : "20",//lista de intervalos com reconpensas negativas do Componente A
-                "PositivePointsValueComponentA" : "10",//valor a ser somado ao seu score do Componente A
-                "NegativePointsValueComponentA" : "10",//valor a ser reduzido do seu score do Componente A
+                "IntervalTime" : "10000",//Intervalo entre os Componetes
+                
+                /**veriicar se posso transformar em objetos e usar funções para dar */
+                
+                //Componete A
+                "CompA":{//todas as propriedades do CompA
+                    "ComponentColor" : "red",//cor do Componente A
+                    "ComponentVi+" : "20",//lista de intervalos com reconpensas positivas do Componente A
+                    "ComponentVi-" : "20",//lista de intervalos com reconpensas negativas do Componente A
+                    "PositivePointsValueComponent" : "10",//valor a ser somado ao seu score do Componente A
+                    "NegativePointsValueComponent" : "10",//valor a ser reduzido do seu score do Componente A
+                    //definição de ativação pontos positivos e negativos: false desataivo e true ativo
+                    "PositivePointsComp" : true,//ativação pontos positivos Componente A
+                    "NegativePointsComp" : false,//ativação pontos negativos Componente A
+                },
                 //CompB
-                "ComponentBColor" : "green",//cor do Componente B
-                "ComponentBVi+" : "40",//lista de intervalos com reconpensas positivas do Componente B
-                "ComponentBVi-" : "40",//lista de intervalos com reconpensas negativas do Componente B
-                "PositivePointsValueComponentB" : "10",//valor a ser somado ao seu score do Componente B
-                "NegativePointsValueComponentB" : "10",//valor a ser reduzido do seu score do Componente B
+                "CompB" :{//todas as propriedades do CompB
+                    "ComponentColor" : "green",//cor do Componente B
+                    "ComponentVi+" : "40",//lista de intervalos com reconpensas positivas do Componente B
+                    "ComponentVi-" : "40",//lista de intervalos com reconpensas negativas do Componente B
+                    "PositivePointsValueComponent" : "10",//valor a ser somado ao seu score do Componente B
+                    "NegativePointsValueComponent" : "10",//valor a ser reduzido do seu score do Componente B
+                    //definição de ativação pontos positivos e negativos: false desataivo e true ativo
+                    "PositivePointsComp" : true,//ativação pontos positivos Componente B
+                    "NegativePointsComp" : false//ativação pontos negativos Componente B
+                }
             }
     ]
 }
