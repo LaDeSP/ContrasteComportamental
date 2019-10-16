@@ -5,7 +5,8 @@
   <body id="body">
     
 
-    <img id="capi" src="App/img/capi.png" onclick="getClick()"/>
+    <img id="capiA" src="App/img/capi.png" onclick="componentA.getClick(componentA.color)"/>
+    <img id="capiB" src="App/img/capi.png" hidden=true onclick="componentB.getClick(componentB.color)"/>
     <div id="placar" hidden="true">
       Pontuação:
     </div>
@@ -17,4 +18,6 @@
   <link rel="stylesheet" type="text/css" href="App/scripts/main.css" />
   <script src="App/scripts/componente.js"></script>
   <script src="App/scripts/placar.js"></script>
+  <script src="App/scripts/teste.js"></script>
+  
 </html>

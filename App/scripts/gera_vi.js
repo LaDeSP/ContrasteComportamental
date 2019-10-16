@@ -1,69 +1,19 @@
-var interval_componentA=0;
-var vi_componentA = [];
-var index_phase=0;
-var number_of_phases_componentA;
-var interval_componentB=0;
-var vi_componentB = [];
-var number_of_phases_componentB;
-var used_viA=[];
-var used_viB=[];
-var list_used_vi=[];
-module.exports = {
-  gera_vi_componentA: function(){//está função devolve um valor do vi especifico
-
-    if(vi_componentA[0]===undefined){
-      vi_componentA=module.exports.carries_lista_componentA();//isso talvez não deve ficar em definitivo aqui
-      vi_componentA=module.exports.embaralha(vi_componentA);//embaralha aqui
-    }
-    interval_componentA=module.exports.gera_intervalo(vi_componentA,interval_componentA);
-    used_viA+=interval_componentA;
-    vi_componentA=module.exports.remove_da_lista(vi_componentA,interval_componentA);
-    return interval_componentA;
-  },
-  gera_intervalo: function(vi){//está função devolve um valor do vi especifico
-    var index=Math.floor((Math.random() * vi.length));
-    var returns= vi[index];
-    return returns;
-  },
-  carries_lista_componentA : function(){//carrega o json para as variaveis
-    var lista=module.exports.return_lista();
-    var vi_used=module.exports.define_vi_cpA(index_phase);
-    var vi_componentA=module.exports.load_vi_componentA(vi_used,lista)//vi_used//_componentA
-    var max=module.exports.max_of_vi(vi_used,lista)
-    return module.exports.interval_list(lista,vi_used);
-  },
-  interval_list:function(lista,vi_used){
-    var list=lista
-    var vi_usado=['VI.vi',vi_used,'.vi']
-    vi_usado=vi_usado.join('')
-    vi_usado = vi_usado.split('.')
-    vi_usado.forEach((item) => {
-      list = list[item]
-    })
-    return list
-  },
-  max_of_vi:function(vi_used,lista){
-    var max_of_vi=lista
-    var vi_usado=['VI.vi',vi_used,'.tamanho']
-    vi_usado=vi_usado.join('')
-    vi_usado = vi_usado.split('.')   
-    vi_usado.forEach((item) => {
-      max_of_vi = max_of_vi[item]
-    })
-    return max_of_vi
-
-  },
-  load_vi_componentA: function(interval,lista){//func em teste  
-    var vi_used = lista 
-    var vi_usado =['VI.vi',interval]
-    vi_usado=vi_usado.join('')
-    vi_usado = vi_usado.split('.')
-    vi_usado.forEach((item) => {
-      vi_used = vi_used[item]
-    })
-    return vi_used
-  },
-  load_experiment:function(){//carrega experiment.json
+//arquivos que o codigo acessa
+var experimentJSON=load_experiment();//arquivo com as configurações do teste
+var listJSON=return_lista();//arquivo com as listas dos VIs
+//objetos do JSON experiment
+var stagesSet=return_stagesSet();
+var stages=return_stages();
+//constantes do codigo
+//var maxIndex=stagesSet.NumberOfStages;//numero de indices que o teste tera
+var indexOfPhases=0;//indice das fases
+var listVIsUseds=[];//lista de objeto JSON
+var maxIndex=stagesSet.NumberOfStages;//numero de indices que o teste tera
+var compA;
+var compB;
+/**carregar arquivos*/
+//carrega experiment.json
+function load_experiment(){
     var fs = require('fs'),
     path = require('path')
     filePath = path.join(__dirname+'/json', 'experiment.json');
@@ -73,9 +23,10 @@ module.exports = {
     } catch (error) {
         return false;
     }
-    return experiment
-  },
-  return_lista:function(){//carrega lista.json
+    return experiment;
+};
+//carrega lista.json
+function return_lista(){
     var fs = require('fs'),
     path = require('path')
     filePath = path.join(__dirname+'/json', 'lista.json');
@@ -85,101 +36,127 @@ module.exports = {
     } catch (error) {
         return false;
     }
-    return lista
-  },
-  define_vi_cpA : function(fase){ //devolve o vi usado no teste no componete 1 //func em teste
-    var experiment=module.exports.load_experiment();
-    number_of_phases=experiment.number_of_phases
-    return experiment.phases[fase].componentA_vi
-  },
-  embaralha : function(vi){//embaralha as variaveis
-    var index_atual = vi.length, temp, index_aleatorio;
-
-    while (0 !== index_atual) {
-      index_aleatorio = Math.floor(Math.random() * index_atual);
-      index_atual -= 1;
-      temp = vi[index_atual];
-      vi[index_atual] = vi[index_aleatorio];
-      vi[index_aleatorio] = temp;
-    }
-    return vi;
-  },
-  remove_da_lista :function(vi, returns){//remove o item usado da lista
-    var i;
-    var j=0;
-    var temp=[];
-    len=vi.length;
-    for(i=0;i<len;i++){
-      if(vi[i]!=returns){
-        temp[j]=vi[i];
-        j++;
-      }
-    }
-    return temp;
-  },
-  /*componenteB */
-  gera_vi_componentB: function(){//está função devolve um valor do vi especifico
-
-    if(vi_componentB[0]===undefined){
-      vi_componentB=module.exports.carries_lista_componentB();//isso talvez não deve ficar em definitivo aqui
-      vi_componentB=module.exports.embaralha(vi_componentB);//embaralha aqui
-    }
-    interval_componentB=module.exports.gera_intervalo(vi_componentB,interval_componentB);//talvez tenha problema
-    used_viB+=interval_componentB;    
-    vi_componentB=module.exports.remove_da_lista(vi_componentB,interval_componentB);
-    return interval_componentB;
-  },
-  carries_lista_componentB : function(){//carrega o json para as variaveis
-    var lista=module.exports.return_lista();
-    var vi_used=module.exports.define_vi_cpB(index_phase);
-    var vi_componentA=module.exports.load_vi_componentB(vi_used,lista)//vi_used//_componentA
-    var max=module.exports.max_of_vi(vi_used,lista)
-    return module.exports.interval_list(lista,vi_used);
-  },
-  load_vi_componentB: function(interval,lista){//func em teste  
-    var vi_used = lista 
-    var vi_usado =['VI.vi',interval]
-    vi_usado=vi_usado.join('')
-    vi_usado = vi_usado.split('.')
-    vi_usado.forEach((item) => {
-      vi_used = vi_used[item]
-    })
-    return vi_used
-  },
-  define_vi_cpB : function(fase){ //devolve o vi usado no teste no componete 1 //func em teste
-    var experiment=module.exports.load_experiment();
-    number_of_phases=experiment.number_of_phases
-    return experiment.phases[fase].componentB_vi
-  },
-  change_phase: function(){
-    if (index_phase<number_of_phases){
-      module.exports.stores_gera_vi();
-      index_phase+=1;
-    }
-  },
-  remove_the_last :function(vi){//remove o item usado da lista
-    var i;
-    var temp=[];
-    len=vi.length;
-    for(i=0;i<len-1;i++){
-      temp[i]=vi[i];
-    }
-    return temp;
-  },
-  stores_gera_vi: function(){//função em teste
-    let temp=[];
-    used_viA=module.exports.remove_the_last(used_viA)
-    used_viB=module.exports.remove_the_last(used_viB)
-    temp={
-      "intervals":{
-        "componentA":[used_viA],
-        "componentB":[used_viB]
-      }
-    }
-    list_used_vi.push(temp)
-  },
-  report_intervals: function(){
-    module.exports.stores_gera_vi();
-    return list_used_vi
-  }
+    return lista;
 };
+//carrega objetos do experinet JSON
+function return_stages(){
+    return experimentJSON.Stages;
+}
+function return_stagesSet(){
+    return experimentJSON.StagesSet;
+}
+function return_testSet(){
+    return experimentJSON.TestSet;
+}
+module.exports = {
+    comp_creator : function(Component){
+        var Comp={};
+        Comp.indexComp=indexOfPhases;//indice do Componente
+        if(Component==="A"){
+            Comp.visCompPOS=stages[this.indexComp].CompA.ComponentViPOS;//lista dos VIs do Componente positivo
+            Comp.visCompNEG=stages[this.indexComp].CompA.ComponentViNEG;//lista dos VIs do Componente negativo
+        }
+        else{
+            Comp.visCompPOS=stages[this.indexComp].compB.ComponentViPOS;//lista dos VIs do Componente positivo
+            Comp.visCompNEG=stages[this.indexComp].CompB.ComponentViNEG;//lista dos VIs do Componente negativo
+        }
+        Comp.visComp=[];
+        Comp.listVisCompPOS=[];//lista dos VIs positivos do Componente 
+        Comp.listVisCompNEG=[];//lista dos VIs negativos do Componente
+        this.fill();//prenche as listas dos VIs 
+        this.listVisCompPOS=this.shuffles(this.listVisCompPOS);//embaralha a lista dos VIs positivos
+        this.listVisCompNEG=this.shuffles(this.listVisCompNEG);//embaralha a lista dos VIs negativos
+        
+        //metodos do objeto
+        this.fill = function(){
+            this.visCompPOS=this.load_vis(this.visCompPOS);//carrega a lista positiva que sera usada no Comp
+            this.visCompNEG=this.load_vis(this.visCompNEG);//carrega a lista negativa que sera usada no Comp
+        };
+        this.load_vis = function(interval){//carrega a lista do Componete de acordo com o intervalo selecionado
+            let list=listJSON;
+            let usedVI=['VI.vi',interval,'.vi'];
+            usedVI=usedVI.join('');
+            usedVI = usedVI.split('.');
+            usedVI.forEach((item) => {
+            list = list[item];
+            })
+            return list;
+        };
+        this.shuffles = function(listVi){//embaralha a lista de intervalos 
+            let currentIndex = listVi.length, temp, index_random;
+            while (0 !== currentIndex) {
+            index_random = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temp = listVi[currentIndex];
+            listVi[currentIndex] = listVi[index_random];
+            listVi[index_random] = temp;
+            }
+            return listVi;
+        };
+        this.random_pick = function(listVI){//está função devolve um valor do vi especifico
+            let scrambled=this.shuffles(listVI);//embaralha a lista
+            let returns=scrambled.pop();//variavel recebe o ultimo item da lista que esta sendo removido
+            listVI=scrambled;//sobrescreve lista que foi modificada
+            return returns;//devolve intervalo a ser usado
+        };
+    },
+    generate_vi : function(component){//função devolve um intervalo relacionado ao componente passado
+         if(component==="A"){
+            return generate_vi_CompA();
+         }
+         else{
+            return generate_vi_CompB();
+         }
+    },
+    /**Processos do Componete A*/
+    generate_vi_CompA :function(){
+        if(compA===undefined){//cria o Componete A caso não tenha sido criado nessa fase
+            compA=comp_creator("A");
+            compA.fill();
+        }
+        if(compA.listVisCompPOS===undefined){//caso a lista de intervalos do Componete A esteja vazia
+            compA.listVisCompPOS=compA.load_vis(compA.visCompPOS);
+            compA.listVisCompPOS=compA.shuffles(compA.listVisCompPOS);
+        }
+        let returns=CompA.random_pick(compA.listVisCompPOS);//escolhe um intervalo aleatorio e remove da lsita de VIs disponiveis
+        Comp.visComp.push(returns);//adiciona o intervalo removido a lista de intevalos usados
+        return returns;//retorna o intervalo que devera ser usado
+    },
+    /**Processos do Componete B*/
+    generate_vi_CompB :function(){
+        if(compB===undefined){//cria o Componete A caso não tenha sido criado nessa fase
+            compB=comp_creator("B");
+            compB.fill();
+        }
+        if(compB.listVisCompPOS===undefined){//caso a lista de intervalos do Componete B esteja vazia 
+            compB.listVisCompPOS=compB.load_vis(compB.visCompPOS);
+            compB.listVisCompPOS=compB.shuffles(compB.listVisCompPOS);
+        }
+        let returns=CompB.random_pick(compB.listVisCompPOS);//escolhe um intervalo aleatorio e remove da lsita de VIs disponiveis
+        Comp.visComp.push(returns);//adiciona o intervalo removido a lista de intevalos usados
+        return returns;//retorna o intervalo que devera ser usado
+    },
+    change_phase : function(){//está função troca o indice dos componentes simbolizando a finalização de uma fase
+        if(CompA.indexComp<maxIndex && CompB.indexComp<maxIndex){
+            CompA.indexComp+=1;
+            CompB.indexComp+=1;
+        }
+        end_phase();//aramazena os dados da fase e limpa as variaveis para a proxima fase
+    }, 
+    end_phase : function(){//esta função armazena os dados dos VI's utilizados ate o momento e esvazia os componentes 
+        let temp={
+            "intervals":{
+            "componentA":[CompA.visComp],
+            "componentB":[CompB.visComp]
+            }
+        };
+        listVIsUseds.push(temp);
+        //sempre limpar os componentes antes de finalizar essa função
+        CompA=[];
+        CompB=[];
+    },
+    report_intervals: function(){//esta função devolve a lista dos vis utilizados no teste por cada componente
+        module.exports.end_phase();
+        return listVIsUseds;
+    }
+}

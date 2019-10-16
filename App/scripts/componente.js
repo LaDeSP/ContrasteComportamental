@@ -1,35 +1,33 @@
-//Função de receber cliques do componente
-
-//const leJson = require('experimentReader');
-const componentTimer = 3000;
-let clickCount = 0;
-const component = document.getElementById("capi");
-const activeComponent = {
-    colorA: "red",
-    colorB: "green",
-    color: "white",
-    timer: function(){
-      console.log('opa joia?');
+//Componente
+class component{
+  constructor(color, posPt, negPt, componentID){
+    this.color = color;
+    this.ptPositiva = posPt;
+    this.ptNegativa = negPt;
+    this.qtdClicks = 0;
+    this.show = document.getElementById(componentID);
+  }
+  getClick(color){
+    this.show.addEventListener("mousedown", function(){
+      this.style.backgroundColor = color;
+    });
+    this.show.addEventListener("mouseup", function() {
+      this.style.backgroundColor = "white";
+    });
+    this.qtdClicks = this.qtdClicks + 1;
+    console.log(this.qtdClicks);
     }
-};
-
-activeComponent.timer();
-activeComponent.color = activeComponent.colorA;
-function getClick() {
-  clickCount += 1;
-  console.log(clickCount);
-  component.addEventListener("mousedown", function() {
-    component.style.backgroundColor = activeComponent.color;
-  });
-  component.addEventListener("mouseup", function() {
-    component.style.backgroundColor = "white";
-  });
+  givePosPoints(posPt){    
+  }
+  giveNegPoints(negPt){
+  }
 }
-//timer para troca de componente ativo por cor
-setInterval(function(){
-    if(activeComponent.color == activeComponent.colorA)
-      activeComponent.color = activeComponent.colorB;    
-    else if(activeComponent.color == activeComponent.colorB)
-      activeComponent.color = activeComponent.colorA;
-    
-}, componentTimer);
+const compVI = require("./App/scripts/gera_vi.js");
+componentA = new component("red", 10, -10, 'capiA');
+componentB = new component("green", 10, -10, 'capiB');
+componentA.getClick();
+componentB.getClick();
+console.log(compVI.generate_vi("A"));
+console.log(componentA.show);
+console.log(componentB.show);
+

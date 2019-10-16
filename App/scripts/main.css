@@ -9,7 +9,13 @@ body {
   right: 15vw;
   top: 10vh;
 }
-#capi{
+#capiA{
+  position: absolute;
+  width: 200px;
+  left: 45%;
+  top: 40%;
+}
+#capiB{
   position: absolute;
   width: 200px;
   left: 45%;
