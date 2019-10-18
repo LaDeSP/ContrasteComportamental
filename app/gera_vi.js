@@ -5,15 +5,13 @@ var listJSON=return_lista();//arquivo com as listas dos VIs
 var stagesSet=return_stagesSet();
 var stages=return_stages();
 //constantes do codigo
-//var maxIndex=stagesSet.NumberOfStages;//numero de indices que o teste tera
 var indexOfPhases=0;//indice das fases
-var listVIsUseds=[];//lista de objeto JSON
+var compUseds=[];//lista de objeto JSON
 var maxIndex=stagesSet.NumberOfStages;//numero de indices que o teste tera
-var compA;
-var compB;
+var compA;//Objeto Componete A
+var compB;//Objeto Componete B
 /**carregar arquivos*/
-//carrega experiment.json
-function load_experiment(){
+function load_experiment(){//carrega experiment.json
     var fs = require('fs'),
     path = require('path')
     filePath = path.join(__dirname+'/json', 'experiment.json');
@@ -25,8 +23,7 @@ function load_experiment(){
     }
     return experiment;
 };
-//carrega lista.json
-function return_lista(){
+function return_lista(){//carrega lista.json
     var fs = require('fs'),
     path = require('path')
     filePath = path.join(__dirname+'/json', 'lista.json');
@@ -38,7 +35,7 @@ function return_lista(){
     }
     return lista;
 };
-//carrega objetos do experinet JSON
+//carrega objetos do experiment JSON
 function return_stages(){
     return experimentJSON.Stages;
 }
@@ -48,115 +45,145 @@ function return_stagesSet(){
 function return_testSet(){
     return experimentJSON.TestSet;
 }
-module.exports = {
-    comp_creator : function(Component){
-        var Comp={};
-        Comp.indexComp=indexOfPhases;//indice do Componente
-        if(Component==="A"){
-            Comp.visCompPOS=stages[this.indexComp].CompA.ComponentViPOS;//lista dos VIs do Componente positivo
-            Comp.visCompNEG=stages[this.indexComp].CompA.ComponentViNEG;//lista dos VIs do Componente negativo
+/**Definição de classe*/
+class Comp{
+    constructor(index,Component){
+        this.indexComp=index;//indice do Componente
+        this.visCompPOS=this.load_interval_visPos(Component);//VI positivo do Componente indicado para a fase
+        this.visCompNEG=this.load_interval_visNeg(Component);//VI negativo do Componente indicado para a fase 
+        this.listVisCompPOS=this.load_list(this.visCompPOS);//lista dos VIs positivos do Componente
+        this.listVisCompNEG=this.load_list(this.visCompNEG);//lista dos VIs negativos do Componente        
+        this.usedVisComp=[];//lista de VIs usados pelo Componete
+    }
+    //metodos do objeto
+    load_interval_visPos(Component){//carrega os indicadores da lista positiva que sera usada no Comp
+        if(Component=="A"){
+            return stages[this.indexComp].CompA.ComponentViPOS;//lista dos VIs do Componente positivo
         }
         else{
-            Comp.visCompPOS=stages[this.indexComp].compB.ComponentViPOS;//lista dos VIs do Componente positivo
-            Comp.visCompNEG=stages[this.indexComp].CompB.ComponentViNEG;//lista dos VIs do Componente negativo
+            return stages[this.indexComp].CompB.ComponentViPOS;//lista dos VIs do Componente positivo
         }
-        Comp.visComp=[];
-        Comp.listVisCompPOS=[];//lista dos VIs positivos do Componente 
-        Comp.listVisCompNEG=[];//lista dos VIs negativos do Componente
-        this.fill();//prenche as listas dos VIs 
-        this.listVisCompPOS=this.shuffles(this.listVisCompPOS);//embaralha a lista dos VIs positivos
-        this.listVisCompNEG=this.shuffles(this.listVisCompNEG);//embaralha a lista dos VIs negativos
-        
-        //metodos do objeto
-        this.fill = function(){
-            this.visCompPOS=this.load_vis(this.visCompPOS);//carrega a lista positiva que sera usada no Comp
-            this.visCompNEG=this.load_vis(this.visCompNEG);//carrega a lista negativa que sera usada no Comp
-        };
-        this.load_vis = function(interval){//carrega a lista do Componete de acordo com o intervalo selecionado
-            let list=listJSON;
-            let usedVI=['VI.vi',interval,'.vi'];
-            usedVI=usedVI.join('');
-            usedVI = usedVI.split('.');
-            usedVI.forEach((item) => {
-            list = list[item];
-            })
-            return list;
-        };
-        this.shuffles = function(listVi){//embaralha a lista de intervalos 
-            let currentIndex = listVi.length, temp, index_random;
-            while (0 !== currentIndex) {
-            index_random = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temp = listVi[currentIndex];
-            listVi[currentIndex] = listVi[index_random];
-            listVi[index_random] = temp;
+    }
+    load_interval_visNeg(Component){//carrega os indicadores da lista negativa que sera usada no Comp
+        if(Component=="A"){
+            return stages[this.indexComp].CompA.ComponentViNEG;//lista dos VIs do Componente negativo
+        }
+        else{
+            return stages[this.indexComp].CompB.ComponentViNEG;//lista dos VIs do Componente negativo
+        }
+    }
+    load_list(interval){//carrega a lista de intervalos definida
+        let list=listJSON;
+        let usedVI=['VI.vi',interval,'.vi'];
+        usedVI=usedVI.join('');
+        usedVI = usedVI.split('.');
+        usedVI.forEach((item) => {
+        list = list[item];
+        })
+        list=this.shuffles(list);
+        return list;
+    }
+    shuffles(listVi){//embaralha a lista de intervalos 
+        let currentIndex = listVi.length, temp, index_random;
+        while (0 !== currentIndex) {
+        index_random = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temp = listVi[currentIndex];
+        listVi[currentIndex] = listVi[index_random];
+        listVi[index_random] = temp;
+        }
+        return listVi;
+    }
+    random_pick(listVI){//está função devolve um valor do vi especifico
+        let scrambled=this.shuffles(listVI);//embaralha a lista
+        let returns=scrambled.pop();//variavel recebe o ultimo item da lista que esta sendo removido
+        listVI=scrambled;//sobrescreve lista que foi modificada
+        return returns;//devolve intervalo a ser usado
+    }
+    visComp_recive_pushed(element){//insere o intervalo definido na lista de intervalos usados
+        let temp=[];
+        temp=this.usedVisComp;
+        temp.push(element);
+        this.usedVisComp=temp;
+    }
+    visComp_recive_poped(){//remove o ultimo intervalo usado na lista de intervalos usados
+        let temp=[];
+        temp=this.usedVisComp;
+        temp.pop();
+        this.usedVisComp=temp;
+    }
+}
+module.exports = {
+    generate_vi : function(component,type){//função devolve um intervalo relacionado ao componente passado
+        if(component==="A"){//verifica de qual componente é necessario enviar o intervalo 
+           return module.exports.generate_vi_CompA(type);
+        }
+        else{
+           return module.exports.generate_vi_CompB(type);
+        }
+   },
+   /**Processos do Componete A*/
+    generate_vi_CompA :function(type){
+        if(compA==undefined){//Constroi o Objeto componente caso ele não tenha sido construido nessa fase
+            compA= new Comp(indexOfPhases,"A");
+        }
+        if(type=="POS"){
+            if(compA.listVisCompPOS==undefined){//Verifica se a lista de intervalos do Componente esta vazia e preenche caso necessário
+                compA.listVisCompPOS=compA.load_list(compA.visCompPOS);
             }
-            return listVi;
-        };
-        this.random_pick = function(listVI){//está função devolve um valor do vi especifico
-            let scrambled=this.shuffles(listVI);//embaralha a lista
-            let returns=scrambled.pop();//variavel recebe o ultimo item da lista que esta sendo removido
-            listVI=scrambled;//sobrescreve lista que foi modificada
-            return returns;//devolve intervalo a ser usado
-        };
+            let intervalUsed=compA.random_pick(compA.listVisCompPOS);//Sortei um intervalo que sera removido da lista de intervalos
+            compA.visComp_recive_pushed(intervalUsed);//Insere o inetervalo usado na lista intevalos 
+            return intervalUsed;
+        }
+        else if(type=="NEG"){
+            if(compA.listVisCompNEG==undefined){//Verifica se a lista de intervalos do Componente esta vazia e preenche caso necessário
+                compA.listVisCompNEG=compA.load_list(compA.visCompNEG);
+            }
+            let intervalUsed=compA.random_pick(compA.listVisCompNEG);//Sortei um intervalo que sera removido da lista de intervalos
+            compA.visComp_recive_pushed(intervalUsed);//Insere o inetervalo usado na lista intevalos 
+            return intervalUsed;
+        }
     },
-    generate_vi : function(component){//função devolve um intervalo relacionado ao componente passado
-         if(component==="A"){
-            return generate_vi_CompA();
-         }
-         else{
-            return generate_vi_CompB();
-         }
-    },
-    /**Processos do Componete A*/
-    generate_vi_CompA :function(){
-        if(compA===undefined){//cria o Componete A caso não tenha sido criado nessa fase
-            compA=comp_creator("A");
-            compA.fill();
+   /**Processos do Componete B*/
+    generate_vi_CompB :function(type){
+        if(compB==undefined){//Constroi o Objeto componente caso ele não tenha sido construido nessa fase
+            compB= new Comp(indexOfPhases,"B");
         }
-        if(compA.listVisCompPOS===undefined){//caso a lista de intervalos do Componete A esteja vazia
-            compA.listVisCompPOS=compA.load_vis(compA.visCompPOS);
-            compA.listVisCompPOS=compA.shuffles(compA.listVisCompPOS);
+        if(type=="POS"){
+            if(compB.listVisCompPOS==undefined){//Verifica se a lista de intervalos do Componente esta vazia e preenche caso necessário
+                compB.listVisCompPOS=compB.load_list(compB.visCompPOS);
+            }
+            let intervalUsed=compB.random_pick(compB.listVisCompPOS);//Sortei um intervalo que sera removido da lista de intervalos
+            compB.visComp_recive_pushed(intervalUsed);//Insere o inetervalo usado na lista intevalos 
+            return intervalUsed;
         }
-        let returns=CompA.random_pick(compA.listVisCompPOS);//escolhe um intervalo aleatorio e remove da lsita de VIs disponiveis
-        Comp.visComp.push(returns);//adiciona o intervalo removido a lista de intevalos usados
-        return returns;//retorna o intervalo que devera ser usado
-    },
-    /**Processos do Componete B*/
-    generate_vi_CompB :function(){
-        if(compB===undefined){//cria o Componete A caso não tenha sido criado nessa fase
-            compB=comp_creator("B");
-            compB.fill();
+        else if(type=="NEG"){
+            if(compB.listVisCompNEG==undefined){//Verifica se a lista de intervalos do Componente esta vazia e preenche caso necessário
+                compB.listVisCompNEG=compB.load_list(compB.visCompNEG);
+            }
+            let intervalUsed=compB.random_pick(compB.listVisCompNEG);//Sortei um intervalo que sera removido da lista de intervalos
+            compB.visComp_recive_pushed(intervalUsed);//Insere o inetervalo usado na lista intevalos 
+            return intervalUsed;
         }
-        if(compB.listVisCompPOS===undefined){//caso a lista de intervalos do Componete B esteja vazia 
-            compB.listVisCompPOS=compB.load_vis(compB.visCompPOS);
-            compB.listVisCompPOS=compB.shuffles(compB.listVisCompPOS);
-        }
-        let returns=CompB.random_pick(compB.listVisCompPOS);//escolhe um intervalo aleatorio e remove da lsita de VIs disponiveis
-        Comp.visComp.push(returns);//adiciona o intervalo removido a lista de intevalos usados
-        return returns;//retorna o intervalo que devera ser usado
     },
     change_phase : function(){//está função troca o indice dos componentes simbolizando a finalização de uma fase
-        if(CompA.indexComp<maxIndex && CompB.indexComp<maxIndex){
-            CompA.indexComp+=1;
-            CompB.indexComp+=1;
+        if(CompA.indexComp<maxIndex && CompA.indexComp<maxIndex){
+            indexOfPhases+=1;
         }
-        end_phase();//aramazena os dados da fase e limpa as variaveis para a proxima fase
+        module.exports.end_phase();//aramazena os dados da fase e limpa as variaveis para a proxima fase
     }, 
     end_phase : function(){//esta função armazena os dados dos VI's utilizados ate o momento e esvazia os componentes 
         let temp={
-            "intervals":{
-            "componentA":[CompA.visComp],
-            "componentB":[CompB.visComp]
-            }
+            "componentA":[compA],
+            "componentB":[compB]
         };
-        listVIsUseds.push(temp);
-        //sempre limpar os componentes antes de finalizar essa função
-        CompA=[];
-        CompB=[];
+        compUseds.push(temp);
+        //sempre limpar os objetos componentes antes de finalizar essa função
+        compA=undefined;
+        compB=undefined;
     },
     report_intervals: function(){//esta função devolve a lista dos vis utilizados no teste por cada componente
         module.exports.end_phase();
-        return listVIsUseds;
+        return compUseds;
     }
 }

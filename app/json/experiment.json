@@ -31,8 +31,8 @@
                 },
                 "CompB" :{
                     "ComponentColor" : "green",
-                    "ComponentVi+" : "40",
-                    "ComponentVi-" : "40",
+                    "ComponentViPOS" : "40",
+                    "ComponentViNEG" : "40",
                     "PositivePointsValueComponent" : "10",
                     "NegativePointsValueComponent" : "10",
                     "PositivePointsComp" : true,
