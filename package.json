@@ -11,6 +11,6 @@
   "scripts": {
     "start": "electron ."
   },
-  "author": "Victor Augusto Fonseca Pinto",
+  "author": "Victor Augusto Fonseca Pinto & Otavio Sessa Souza",
   "license": "ISC"
 }

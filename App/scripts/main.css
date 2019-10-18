@@ -1,23 +1,71 @@
 body {
-  background-color: white
+  background-color: white;
 }
 
-
 /*Elementos por ID*/
-#placar{
+#placar {
   position: absolute;
   right: 15vw;
   top: 10vh;
 }
-#capiA{
+#capiA {
   position: absolute;
   width: 200px;
   left: 45%;
   top: 40%;
 }
-#capiB{
+#capiB {
   position: absolute;
   width: 200px;
   left: 45%;
   top: 40%;
+}
+
+/*Elementos da modal de pontuação*/
+ .modal{
+   display: none;
+ }
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2px 16px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  margin-top: 25%;
+  padding: 0;
+  border: 1px solid #888;
+  width: 25%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }

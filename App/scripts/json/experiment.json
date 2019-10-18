@@ -21,20 +21,20 @@
                 "NumberOfCycles" : "16",
                 "IntervalTime" : "10000",
                 "CompA":{
-                    "ComponentColor" : "red",
+                    "ComponentColor" : "pink",
                     "ComponentViPOS" : "20",
                     "ComponentViNEG" : "20",
-                    "PositivePointsValueComponent" : "10",
-                    "NegativePointsValueComponent" : "10",
+                    "PosPtsGive" : "10",
+                    "NegPtsGive" : "10",
                     "PositivePointsComp" : true,
                     "NegativePointsComp" : false
                 },
                 "CompB" :{
-                    "ComponentColor" : "green",
+                    "ComponentColor" : "blue",
                     "ComponentVi+" : "40",
                     "ComponentVi-" : "40",
-                    "PositivePointsValueComponent" : "10",
-                    "NegativePointsValueComponent" : "10",
+                    "PosPtsGive" : "10",
+                    "NegPtsGive" : "10",
                     "PositivePointsComp" : true,
                     "NegativePointsComp" : false
                 }
