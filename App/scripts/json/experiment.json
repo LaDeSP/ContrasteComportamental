@@ -3,7 +3,7 @@
     "TestSet" : {
         "TestType" : "altenado",
         "TestTime" : "600000",
-        "CollectTime": "4000",
+        "CollectTime": "5000",
         "COD" : "1000",
         "ICI" : "1500",
         "ShowScoreInterval" : "10000",
@@ -21,7 +21,7 @@
                 "NumberOfCycles" : "16",
                 "IntervalTime" : "10000",
                 "CompA":{
-                    "ComponentColor" : "pink",
+                    "ComponentColor" : "red",
                     "ComponentViPOS" : "20",
                     "ComponentViNEG" : "20",
                     "PosPtsGive" : "10",
@@ -30,7 +30,7 @@
                     "NegativePointsComp" : false
                 },
                 "CompB" :{
-                    "ComponentColor" : "blue",
+                    "ComponentColor" : "green",
                     "ComponentVi+" : "40",
                     "ComponentVi-" : "40",
                     "PosPtsGive" : "10",

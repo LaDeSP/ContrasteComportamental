@@ -22,13 +22,17 @@ body {
 }
 
 /*Elementos da modal de pontuação*/
- .modal{
-   display: none;
- }
+#coletaPonto{
+  position: center;
+  margin-left: 35%;
+}
+.modal{
+  display: none;
+}
 /* Modal Header */
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #00ff9d;
   color: white;
 }
 
@@ -40,7 +44,7 @@ body {
 /* Modal Footer */
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #00ff9d;
   color: white;
 }
 

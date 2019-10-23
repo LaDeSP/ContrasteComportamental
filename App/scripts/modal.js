@@ -1,23 +1,37 @@
-var modal = document.getElementById('myModal');
-var btn = document.getElementById('coletaPonto');
+class modal {
+  constructor(collectTime) {
+    this.element = document.getElementById("myModal");
+    this.header = document.getElementById("header");
+    this.footer = document.getElementById("footer");
+    this.btn = document.getElementById("coletaPonto");
+    this.btn.onclick = function() {
+      document.getElementById("myModal").style.display = "none";
+    };
+    this.collectTime = collectTime;
+  }
+  showModal(color, signal, component) {
+    this.header.style.backgroundColor = color;
+    this.footer.style.backgroundColor = color;
+    this.element.style.display = "block";
 
-module.exports = { 
-    showModal: function(collectTime, compID){
-        modal.style.display = "block";
-        btn.onclick = function(){
-            modal.style.display = "none"
-            clearTimeout(timeout);
-            if(compID == "posA")
-                componentA.posViCount();
-            else if(compID == "posB")
-                componentB.posViCount();
-            else if(compID == "negA")
-                componentA.negViCount();
-            else if(compID == "negB")
-                componentB.negViCount();
-        }
-        var timeout = setTimeout(function(){
-            modal.style.display = "none";
-        }, collectTime);
+    if (signal == "pos") {
+      setTimeout(function() {
+        document.getElementById("myModal").style.display = "none";
+        component.posViCount();
+      }, this.collectTime);
     }
+    if (signal == "neg") {
+      setTimeout(function() {
+        document.getElementById("myModal").style.display = "none";
+        component.negViCount();
+      }, this.collectTime);
+    }
+    setTimeout(function() {
+      document.getElementById("myModal").style.display = "none";
+    }, this.collectTime);
+  }
+  hideModal() {
+    this.element.style.display = "none";
+  }
 }
+module.exports = modal;
