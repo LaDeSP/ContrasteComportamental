@@ -1,34 +1,38 @@
 class modal {
-  constructor(collectTime) {
-    this.element = document.getElementById("myModal");
-    this.header = document.getElementById("header");
-    this.footer = document.getElementById("footer");
-    this.btn = document.getElementById("coletaPonto");
-    this.btn.onclick = function() {
-      document.getElementById("myModal").style.display = "none";
-    };
+  constructor(collectTime, teste, element, header, footer, collect) {
+    this.element = document.getElementById(element);
+    this.header = document.getElementById(header);
+    this.footer = document.getElementById(footer);
     this.collectTime = collectTime;
+    this.btn = document.getElementById(collect);
+    this.compChanger = teste;
+    this.timer;
   }
   showModal(color, signal, component) {
     this.header.style.backgroundColor = color;
     this.footer.style.backgroundColor = color;
     this.element.style.display = "block";
-
+    this.element.focus();
+    var that = this;
+    clearInterval(that.compChanger.changer);
     if (signal == "pos") {
+      console.log(that.compChanger);
       setTimeout(function() {
-        document.getElementById("myModal").style.display = "none";
-        component.posViCount();
+        if (that.element.style.display == "block") {
+          that.element.style.display = "none";
+          that.compChanger.beginChanger();
+          component.posViCount();
+        }
       }, this.collectTime);
     }
     if (signal == "neg") {
       setTimeout(function() {
-        document.getElementById("myModal").style.display = "none";
-        component.negViCount();
+        if (that.element.style.display == "block") {
+          that.element.style.display = "none";
+          component.negViCount();
+        }
       }, this.collectTime);
     }
-    setTimeout(function() {
-      document.getElementById("myModal").style.display = "none";
-    }, this.collectTime);
   }
   hideModal() {
     this.element.style.display = "none";

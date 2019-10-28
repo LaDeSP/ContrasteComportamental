@@ -3,24 +3,44 @@
   <head></head>
 
   <body id="body">
-    
-
-    <img id="capiA" src="App/img/capi.png" onclick="componentA.getClick(componentA.color)"/>
-    <img id="capiB" src="App/img/capi.png" hidden=true onclick="componentB.getClick(componentB.color)"/>
+    <img id="capiA" src="App/img/capi.png" />
+    <img id="capiB" src="App/img/capi.png" hidden="true" />
     <div id="placar" hidden="true">
-      <div id="box">
-        Pontuação:
+      <div id="scoreBox">
+        <p id="scoreText">Pontuação: 0</p>
       </div>
-      
     </div>
 
-    <div id="myModal" class="modal">
-      <div id="content" class="modal-content">
-        <div id="header" class="modal-header">
+    <div
+      id="myModalA"
+      class="modal"
+      data-keyboard="false"
+      data-backdrop="static"
+    >
+      <div id="overlay"></div>
+      <div id="contentA" class="modal-content">
+        <div id="headerA" class="modal-header">
           <h2>Você ganhou um ponto!</h2>
         </div>
-        <div id="footer" class="modal-footer">
-          <button id="coletaPonto">Coletar Ponto</button>
+        <div id="footerA" class="modal-footer">
+          <button id="coletaPontoA">Coletar Ponto</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="myModalB"
+      class="modal"
+      data-keyboard="false"
+      data-backdrop="static"
+    >
+      <div id="overlay"></div>
+      <div id="contentB" class="modal-content">
+        <div id="headerB" class="modal-header">
+          <h2>Você ganhou um ponto!</h2>
+        </div>
+        <div id="footerB" class="modal-footer">
+          <button id="coletaPontoB">Coletar Ponto</button>
         </div>
       </div>
     </div>
@@ -28,6 +48,5 @@
 
   <!--Scripts e arquivos de carregamento-->
   <link rel="stylesheet" type="text/css" href="App/scripts/main.css" />
-  <script src="App/scripts/teste.js"></script>
-  
+  <script src="App/scripts/testSet.js"></script>
 </html>

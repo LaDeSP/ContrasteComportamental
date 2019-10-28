@@ -3,6 +3,7 @@ class Placar{
     constructor(showInterval){
         this.showInterval = showInterval;
         this.show;
+        this.info = document.getElementById('scoreText').innerHTML;
     }
     scoreShow(){
         this.show = setInterval(function(){

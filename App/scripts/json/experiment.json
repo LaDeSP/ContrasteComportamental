@@ -6,7 +6,7 @@
         "CollectTime": "5000",
         "COD" : "1000",
         "ICI" : "1500",
-        "ShowScoreInterval" : "10000",
+        "ShowScoreInterval" : "5000",
         "ScoreShow" : "3000",
         "PointsPerTask" : "10"
     },
@@ -19,7 +19,7 @@
             {
                 "Condition" : "A",
                 "NumberOfCycles" : "16",
-                "IntervalTime" : "10000",
+                "IntervalTime" : "12000",
                 "CompA":{
                     "ComponentColor" : "red",
                     "ComponentViPOS" : "20",
