@@ -1,45 +1,52 @@
+<!DOCTYPE html>
 <html>
-<head> 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-    
-    <script src="modal/jquery.min.js"></script>
-    <script src="phaser/phaser.js"></script>
-    <script src="teste_sequencial.js"></script>
+  <head></head>
 
-    
-</head>
-<body >  
-       
+  <body id="body">
+    <img id="capiA" src="App/img/capi.png" />
+    <img id="capiB" src="App/img/capi.png" hidden="true" />
+    <div id="placar" hidden="true">
+      <div id="scoreBox">
+        <p id="scoreText">Pontuação: 0</p>
+      </div>
+    </div>
 
-    <div id="score"
-   style="
-      top: 0;
-      left: 820;
-      position: absolute;
-      z-index: 1;
-      display: show;"></div>
-<h1></h1>
-<h2></h2>
- 
-      <!-- Modal -->
-      <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" style="top: 450; left: 0;">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"></h5>
-                  
-                </div>
-                <div class="modal-body">
-                  <p>Parabéns! Você ganhou um ponto</p>
-                </div>
-                <div class="modal-footer">
-                  <button id="coletaPts" type="button" class="btn btn-primary" data-dismiss="modal" onclick="clicaModal()" >Coletar Ponto</button>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+    <div
+      id="myModalA"
+      class="modal"
+      data-keyboard="false"
+      data-backdrop="static"
+    >
+      <div id="overlay"></div>
+      <div id="contentA" class="modal-content">
+        <div id="headerA" class="modal-header">
+          <h2>Você ganhou um ponto!</h2>
+        </div>
+        <div id="footerA" class="modal-footer">
+          <button id="coletaPontoA">Coletar Ponto</button>
+        </div>
+      </div>
+    </div>
 
-</body>
+    <div
+      id="myModalB"
+      class="modal"
+      data-keyboard="false"
+      data-backdrop="static"
+    >
+      <div id="overlay"></div>
+      <div id="contentB" class="modal-content">
+        <div id="headerB" class="modal-header">
+          <h2>Você ganhou um ponto!</h2>
+        </div>
+        <div id="footerB" class="modal-footer">
+          <button id="coletaPontoB">Coletar Ponto</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!--Scripts e arquivos de carregamento-->
+  <link rel="stylesheet" type="text/css" href="App/scripts/main.css" />
+  <script src="App/scripts/testSet.js"></script>
 </html>
