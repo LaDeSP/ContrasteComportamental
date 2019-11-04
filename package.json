@@ -1,23 +1,16 @@
 {
-  "name": "contraste-comportamental",
-  "version": "1.0.1",
-  "description": "Programa teste para modo sequencial com componentes estaticos",
+  "name": "comportamental",
+  "version": "1.0.0",
+  "description": "",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
-  },
-  "author": "Victor Augusto",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
-    "requirejs": "^2.3.6"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "electron-packager": "^13.1.1",
-    "electron-prebuilt-compile": "^4.0.0"
-  }
+"electron": "^6.0.7",
+    "electron-builder": "^21.2.0",
+    "electron-packager": "^14.0.6"},
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Victor Augusto Fonseca Pinto & Otavio Sessa Souza",
+  "license": "ISC"
 }
