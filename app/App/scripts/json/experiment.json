@@ -1,0 +1,43 @@
+{
+    "TrainingTime" : "180000",
+    "TestSet" : {
+        "TestType" : "altenado",
+        "TestTime" : "600000",
+        "CollectTime": "5000",
+        "COD" : "1000",
+        "ICI" : "1500",
+        "ShowScoreInterval" : "5000",
+        "ScoreShow" : "3000",
+        "PointsPerTask" : "10"
+    },
+    "StagesSet": {
+        "NumberOfStages" : "1",
+        "ComponentTime" : "15000",
+        "OrderOfConditions" : "A-A"
+    },
+    "Stages" : [
+            {
+                "Condition" : "A",
+                "NumberOfCycles" : "16",
+                "IntervalTime" : "12000",
+                "CompA":{
+                    "ComponentColor" : "red",
+                    "ComponentViPOS" : "20",
+                    "ComponentViNEG" : "20",
+                    "PosPtsGive" : "10",
+                    "NegPtsGive" : "10",
+                    "PositivePointsComp" : true,
+                    "NegativePointsComp" : false
+                },
+                "CompB" :{
+                    "ComponentColor" : "green",
+                    "ComponentVi+" : "40",
+                    "ComponentVi-" : "40",
+                    "PosPtsGive" : "10",
+                    "NegPtsGive" : "10",
+                    "PositivePointsComp" : true,
+                    "NegativePointsComp" : false
+                }
+            }
+    ]
+}
