@@ -31,17 +31,10 @@
                 },
                 "CompB" :{
                     "ComponentColor" : "green",
-<<<<<<< HEAD:App/scripts/json/experiment.json
                     "ComponentVi+" : "40",
                     "ComponentVi-" : "40",
                     "PosPtsGive" : "10",
                     "NegPtsGive" : "10",
-=======
-                    "ComponentViPOS" : "40",
-                    "ComponentViNEG" : "40",
-                    "PositivePointsValueComponent" : "10",
-                    "NegativePointsValueComponent" : "10",
->>>>>>> master:app/json/experiment.json
                     "PositivePointsComp" : true,
                     "NegativePointsComp" : false
                 }

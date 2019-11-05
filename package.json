@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "electron-json-storage": "^4.1.8"
+  },
   "devDependencies": {
-"electron": "^6.0.7",
+    "electron": "^6.0.7",
     "electron-builder": "^21.2.0",
-    "electron-packager": "^14.0.6"},
+    "electron-packager": "^14.0.6"
+  },
   "scripts": {
     "start": "electron ."
   },

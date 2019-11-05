@@ -1,11 +1,13 @@
 //req de class
-const expParam = require("./App/scripts/le_experiment.js").le_experiment();
+var expParam = require("./App/scripts/le_experiment.js");
+expParam = expParam.le_experiment();
 const componentClass = require("./App/scripts/componente.js");
 const modalClass = require("./App/scripts/modal.js");
 const scoreClass = require("./App/scripts/placar.js");
 const VI = require("./App/scripts/gera_vi.js");
 const test = require("./App/scripts/test.js");
 const remote = require('electron').remote;
+console.log(expParam);
 const compParamA = expParam.Stages[0].CompA;
 const compParamB = expParam.Stages[0].CompB;
 
@@ -78,5 +80,3 @@ setTimeout(function(){
   var window = remote.getCurrentWindow();
   window.close();
 }, teste.phaseTime);
-
-
