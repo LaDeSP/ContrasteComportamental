@@ -1,7 +1,7 @@
 {
   "name": "comportamental",
   "version": "1.0.0",
-  "description": "",
+  "description": "O programa executa com electron",
   "main": "main.js",
   "dependencies": {
     "electron-json-storage": "^4.1.8"
@@ -15,5 +15,13 @@
     "start": "electron ."
   },
   "author": "Victor Augusto Fonseca Pinto & Otavio Sessa Souza",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaDeSP/ContrasteComportamental.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LaDeSP/ContrasteComportamental/issues"
+  },
+  "homepage": "https://github.com/LaDeSP/ContrasteComportamental#readme"
 }
