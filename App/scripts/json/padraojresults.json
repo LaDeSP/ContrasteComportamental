@@ -8,7 +8,10 @@
         "ICI" : "1500",
         "ShowScoreInterval" : "5000",
         "ScoreShow" : "3000",
-        "PointsPerTask" : "10"
+        "PointsPerTask" : "10",
+        
+        "TotalPoints" : "20",
+        "TotalInterationTime" : "500000"
     },
     "StagesSet": {
         "NumberOfStages" : "1",
@@ -19,6 +22,7 @@
                 "Condition" : "A",
                 "NumberOfCycles" : "16",
                 "IntervalTime" : "12000",
+                "StageInterationTime": "50000",
                 "CompA":{
                     "ComponentColor" : "red",
                     "ComponentViPOS" : "20",
@@ -26,16 +30,26 @@
                     "PosPtsGive" : "10",
                     "NegPtsGive" : "10",
                     "PositivePointsComp" : true,
-                    "NegativePointsComp" : false
+                    "NegativePointsComp" : false,
+                    
+                    "PosVIsUsed" : [],
+                    "NegVIsUsed" : [],
+                    "CompqtdClicks" : "20",
+                    "CompInterationTime": "5000"
                 },
-                "CompB" :{
-                    "ComponentColor" : "green",
-                    "ComponentViPOS" : "40",
-                    "ComponentViNEG" : "40",
+                "CompB":{
+                    "ComponentColor" : "red",
+                    "ComponentViPOS" : "20",
+                    "ComponentViNEG" : "20",
                     "PosPtsGive" : "10",
                     "NegPtsGive" : "10",
                     "PositivePointsComp" : true,
-                    "NegativePointsComp" : false
+                    "NegativePointsComp" : false,
+                    
+                    "PosVIsUsed" : [],
+                    "NegVIsUsed" : [],
+                    "CompqtdClicks" : "20",
+                    "CompInterationTime": "5000"
                 }
             }
     ]

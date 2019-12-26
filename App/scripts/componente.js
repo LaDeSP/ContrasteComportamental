@@ -1,16 +1,22 @@
 //Componente
 class component {
-  constructor(color, posVI, negVI, points, componentID) {
+  constructor(color, posVI, negVI, points, componentID, posVIUsing, negVIUsing, posVIinterval, negVIinterval, compPIT) {
     this.color = color;
     this.points = points;
     this.qtdClicks = 0;
     this.element = document.getElementById(componentID);
     this.posVI = posVI;
-    this.posVIUsing = 10;
+    this.posVIUsing = posVIUsing;
     this.negVI = negVI;
-    this.negVIUsing = 10;
+    this.negVIUsing = negVIUsing;
     this.score = 0;
     this.check = false;
+    //teste
+    this.posVIinterval=posVIinterval;
+    this.negVIinterval=negVIinterval;
+    this.posVIsUsed=[];
+    this.negVIsUsed=[];
+    this.compPIT=compPIT;
   }
   getClick() {
     var that = this;
@@ -26,10 +32,7 @@ class component {
       function() {
         that.element.style.backgroundColor = "white";
         that.qtdClicks = that.qtdClicks + 1;
-        console.log(
-          "Quantidade de cliques do elemento atual: ",
-          that.qtdClicks
-        );
+        that.compPIT.getClick();
         if (that.posVIUsing <= 0) {
           that.points.showModal(that.color, "pos", that);
         }
@@ -44,11 +47,11 @@ class component {
   posViCount() {
     clearInterval(timer);
     var that = this;
-    that.posVIUsing = that.posVI.get_interval(30);
+    that.posVIUsing = that.posVI.get_interval(that.posVIinterval);
+    that.posVIsUsed = this.pushValue(that.posVIsUsed,that.posVIUsing);//teste
     var timer = setInterval(function() {
       if (that.element.hidden == false) {
         if (that.posVIUsing > 0) {
-          console.log("VI positivo do componente", that.posVIUsing);
           that.posVIUsing = that.posVIUsing - 500;
         } else if (that.posVIUsing <= 0) {
           clearInterval(timer);
@@ -58,10 +61,12 @@ class component {
   }
   negViCount() {
     var that = this;
-    that.negVIUsing = that.negVI.get_interval(30);
+    that.negVIUsing = that.negVI.get_interval(that.negVIinterval);
+    
+    that.negVIsUsed = this.pushValue(that.negVIsUsed,that.negVIUsing);//teste
+
     var timer = setInterval(function() {
       if (that.element.hidden == false) {
-        console.log(that.negVIUsing);
         if (that.negVIUsing > 0) {
           that.negVIUsing = that.negVIUsing - 100;
         } else if (that.negVIUsing <= 0) {
@@ -69,6 +74,11 @@ class component {
         }
       }
     }, 100);
+  }
+  pushValue(array,value){
+    let temp=array;
+    temp.push(value);
+    return temp;
   }
 }
 module.exports = component;

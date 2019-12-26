@@ -16,7 +16,7 @@ class modal {
     var that = this;
     clearInterval(that.compChanger.changer);
     if (signal == "pos") {
-      console.log(that.compChanger);
+      this.postPoints+=1;//teste
       setTimeout(function() {
         if (that.element.style.display == "block") {
           that.element.style.display = "none";
