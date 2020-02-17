@@ -11,7 +11,7 @@ function createWindow() {
     }
   });
   // e carregar o index.html do aplicativo.
-  win.loadFile("userIndex.html");
+  win.loadFile("index.html");
 }
 
 app.on("ready", createWindow);
