@@ -47,7 +47,7 @@ module.exports = {
             "number of phases":number_of_phases,
             "phases":phases
         }
-        module.exports.whrite_report(report_results)
+        module.exports.write_report(report_results)
     },
     load_experiment:function(){//carrega experiment.json
         var fs = require('fs'),
@@ -133,7 +133,7 @@ module.exports = {
         return intervals
     },
     /*grava relatorio*/
-    whrite_report : function(report_results){
+    write_report : function(report_results){
         var archive;
         var fs = require('fs'),
         path = require('path')
@@ -155,7 +155,7 @@ module.exports = {
             var content=[]
             try {
                 fs.writeFileSync(filePath, JSON.stringify(content));
-                module.exports.whrite_report(report_results)
+                module.exports.write_report(report_results)
             } catch (err) {
                 return console.log(err);
             
