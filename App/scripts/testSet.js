@@ -113,5 +113,5 @@ while (index < expParam.StagesSet.NumberOfStages) {
       report.storageComps(componentA, componentB);
       window.reload();
     }
-  }, 20000); //teste.phaseTime);
+  }, teste.phaseTime);
 }
