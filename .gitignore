@@ -1,3 +1,4 @@
+node_modules/
 node_modules/yargs/locales/zh_TW.json
 node_modules/.bin/build
 node_modules/.bin/electron-builder

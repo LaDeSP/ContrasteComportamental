@@ -1,8 +1,9 @@
 {
+    "ID":"0",
     "TrainingTime" : "180000",
     "TestSet" : {
-        "TestType" : "altenado",
-        "TestTime" : "600000",
+        "TestType" : "Alternado",
+        "TestTime" : "6000",
         "CollectTime": "5000",
         "COD" : "1000",
         "ICI" : "1500",

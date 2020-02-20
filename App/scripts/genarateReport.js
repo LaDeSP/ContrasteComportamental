@@ -1,3 +1,6 @@
+var componenteA=[];
+var componenteB=[];
+
 module.exports = {
     makeReport : function(expParam,compA,compB){
         let report=module.exports.createReport(expParam,compA,compB);
@@ -32,9 +35,10 @@ module.exports = {
     },
     createReport : function(expParam,compA,compB){
         var stagesSet = module.exports.createStagesSet(expParam);
-        var stages = module.exports.createStages(expParam,compA,compB,stagesSet.NumberOfStages);
+        var stages = module.exports.createStages(expParam,stagesSet.NumberOfStages);
         var testSet = module.exports.createTest(expParam.TestSet,stagesSet);
         let report={
+            "ID" : expParam.ID,
             "TrainingTime" : expParam.TrainingTime,
             "TestSet" : testSet,
             "StagesSet": stagesSet,
@@ -42,7 +46,7 @@ module.exports = {
         }
         return report;
     },
-    createTest : function(test,stagesSet){
+    createTest : function(test,stagesSet){//função cagada
         let testSet={
             "TestType" : test.TestType,
             "TestTime" : test.TestTime,
@@ -65,46 +69,51 @@ module.exports = {
         };
         return stagesSet;
     },
-    createStages : function(expParam,compA,compB,maxIndex){
+    createStages : function(expParam,maxIndex){
         var stages = [];
         for (let index = 0; index < maxIndex; index++) {
             let tempStage={
                 "Condition" : expParam.Stages[index].Condition,
                 "NumberOfCycles" : expParam.Stages[index].NumberOfCycles,
                 "IntervalTime" :  expParam.Stages[index].IntervalTime,
-                "StageInterationTime": compA.compPIT.tT+compB.compPIT.tT,
-                "StageTotalPoints" : compA.score + compB.score,
+                "StageInterationTime": componenteA[index].compPIT.tT+componenteB[index].compPIT.tT,
+                "StageTotalPoints" : componenteA[index].score + componenteB[index].score,
                 "CompA":{
-                    "ComponentColor" : compA.color,
-                    "ComponentViPOS" : compA.posVIinterval,
-                    "ComponentViNEG" : compA.negVIinterval,
-                    "PosPtsGive" : compA.score,
-                    "NegPtsGive" : compA.score,
-                    "PositivePointsComp" : compA.score,
-                    "NegativePointsComp" : compA.score,
+                    "ComponentColor" : componenteA[index].color,
+                    "ComponentViPOS" : componenteA[index].posVIinterval,
+                    "ComponentViNEG" : componenteA[index].negVIinterval,
+                    "PosPtsGive" : componenteA[index].score,
+                    "NegPtsGive" : componenteA[index].score,
+                    "PositivePointsComp" : componenteA[index].score,
+                    "NegativePointsComp" : componenteA[index].score,
                     
-                    "PosVIsUsed" : compA.posVIsUsed,
-                    "NegVIsUsed" : compA.negVIsUsed,
-                    "CompqtdClicks" : compA.color,
-                    "CompInterationTime": compA.compPIT.tT
+                    "PosVIsUsed" : componenteA[index].posVIsUsed,
+                    "NegVIsUsed" : componenteA[index].negVIsUsed,
+                    "CompqtdClicks" : componenteA[index].color,
+                    "CompInterationTime": componenteA[index].compPIT.tT
                 },
                 "CompB":{
-                    "ComponentColor" : compB.color,
-                    "ComponentViPOS" : compB.posVIinterval,
-                    "ComponentViNEG" : compB.negVIinterval,
-                    "PosPtsGive" : compB.score,
-                    "NegPtsGive" : compB.score,
-                    "PositivePointsComp" : compB.score,
-                    "NegativePointsComp" : compB.score,
+                    "ComponentColor" : componenteB[index].color,
+                    "ComponentViPOS" : componenteB[index].posVIinterval,
+                    "ComponentViNEG" : componenteB[index].negVIinterval,
+                    "PosPtsGive" : componenteB[index].score,
+                    "NegPtsGive" : componenteB[index].score,
+                    "PositivePointsComp" : componenteB[index].score,
+                    "NegativePointsComp" : componenteB[index].score,
                     
-                    "PosVIsUsed" : compB.posVIsUsed,
-                    "NegVIsUsed" : compB.negVIsUsed,
-                    "CompqtdClicks" : compB.color,
-                    "CompInterationTime": compB.compPIT.tT
+                    "PosVIsUsed" : componenteB[index].posVIsUsed,
+                    "NegVIsUsed" : componenteB[index].negVIsUsed,
+                    "CompqtdClicks" : componenteB[index].color,
+                    "CompInterationTime": componenteB[index].compPIT.tT
                 }
             }
             stages.push(tempStage);
         }
         return stages;
+    },
+    storageComps : function(compA, compB){
+        console.log(compB);
+        componenteA.push(compA);
+        componenteB.push(compB);
     }
 }

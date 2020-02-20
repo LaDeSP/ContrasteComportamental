@@ -89,7 +89,7 @@ score.scoreShow(score.showInterval, "pos", componentA, teste.compChange);
 componentA.posViCount();
 componentB.posViCount();
 
-
+report.storageComps(componentA,componentB);
 setTimeout(function(){
   report.makeReport(expParam,componentA,componentB)//teste
   var window = remote.getCurrentWindow();
