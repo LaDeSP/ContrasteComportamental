@@ -90,10 +90,17 @@ componentA.posViCount();
 componentB.posViCount();
 
 report.storageComps(componentA,componentB);
-setTimeout(function(){
-  report.makeReport(expParam,componentA,componentB)//teste
-  var window = remote.getCurrentWindow();
-  window.close();
-}, teste.phaseTime);
+while (index < expParam.StagesSet.NumberOfStages) {
+  index++;
+  setTimeout(function() {
+    var window = remote.getCurrentWindow();
+        if(index >= expParam.StagesSet.NumberOfStages){
+          report.makeReport(expParam, componentA, componentB)
+          window.close();
+        }
+        else
+          window.reload();
+  }, 5000); //teste.phaseTime);
+}
 
 
