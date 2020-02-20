@@ -100,7 +100,7 @@ while (index < expParam.StagesSet.NumberOfStages) {
         }
         else
           window.reload();
-  }, 5000); //teste.phaseTime);
+  }, teste.phaseTime);
 }
 
 
