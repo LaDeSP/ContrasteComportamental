@@ -1,10 +1,14 @@
 const expParam = require("./App/scripts/le_experiment.js").le_experiment();
 function loadValues(expParam){
     var testSet=expParam.TestSet;
-    var stagesSet=expParam.StagesSet;//move
+    var stagesSet=expParam.StagesSet;
     var stages=expParam.Stages;
     fillTestSetValues(testSet);
-    fillStages(stages);
+    /*transformar depois*/
+    var compAVI=document.getElementById("compaVIinput");
+    compAVI.value=stages[0].CompA.ComponentViPOS;
+    var compBVI=document.getElementById("compbVIinput");
+    compBVI.value=stages[0].CompB.ComponentViPOS;
 }
 
 function fillTestSetValues(testSet){
@@ -30,39 +34,30 @@ function fillTestSetValues(testSet){
         if(field.name=="TesteType"){
             field.value=jsonV[0];
         }
-        for (let i = 0; i < [jsonK].length; i++) {
-            if(field.name==jsonK[index]){
-                field.value=jsonV[index];
+        for (let i = 1; i < jsonK.length; i++) {
+            if(field.name==jsonK[i]){
+                field.value=jsonV[i];
             }    
         }     
     });
 }
 
-function fillStages(stages){
-    var maxIndex=1;
-    var index=0;
-    if(index<maxIndex){
-        fillStage(index,stages[index])
-    }else{
-        console.log("error");
-    }
-}
-function fillStage(index,stage){
-    let staticsFields = document.querySelectorAll("#Stages [name]");
-    console.log(staticsFields);
-    staticsFields.forEach(function(field,index){
-        console.log(field.name,field.id,index);
+loadValues(expParam);
+writeExparam();
+/** */
+function writeExparam(){
+    let specs = document.querySelectorAll("#optionBox [name]");
+    specs.forEach(function(field,index){
+        console.log(index,field.name,field.value);
     });
 
 }
-loadValues(expParam);
-
 
 /**/
-var next = document.getElementById("next");
 next.addEventListener("mousedown",function(next){
     window.location.href = "index.html";
 });
 function runTest(next) {
+    console.log("next");
     window.location.href = "index.html";
 }
