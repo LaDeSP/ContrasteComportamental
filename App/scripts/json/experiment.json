@@ -2,7 +2,7 @@
     "ID":"0",
     "TrainingTime" : "180000",
     "TestSet" : {
-        "TestType" : "Alternado",
+        "TestType" : "Concorrente",
         "TestTime" : "6000",
         "CollectTime": "5000",
         "COD" : "1000",

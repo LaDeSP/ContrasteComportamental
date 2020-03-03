@@ -1,12 +1,12 @@
 class interactionTime{
     constructor(){
-        this.iT = undefined;
+        this.iT = 0;
         this.tT = 0;
         this.timer = 0;
     }
     getClick(){
         var that = this;
-        if(that.iT == undefined){
+        if(that.iT == 0){
             that.iT = 0;
             this.startTimer();
         }

@@ -71,8 +71,22 @@ var componentB = new componentClass(
 );
 componentA.getClick();
 componentB.getClick();
+
+if(expParam.TestSet.TestType == "Concorrente"){
+  let compA = document.getElementById('capiA');
+  let compB = document.getElementById('capiB');
+
+  compA.hidden = false;
+  compB.hidden = false;
+  compA.style.left = '15%';
+  compB.style.left = '60%';
+
+  }
+
 pointsA.btn.onclick = function() {
-  teste.beginChanger();
+  if (expParam.TestSet.TestType == "Alternado") {
+    teste.beginChanger();
+  }
   componentA.score++;
   document.getElementById("scoreText").innerHTML =
     "Pontuação: " + (componentA.score + componentB.score);
@@ -84,19 +98,20 @@ pointsA.btn.onclick = function() {
   document.getElementById("myModalA").style.display = "none";
 };
 pointsB.btn.onclick = function() {
-  teste.beginChanger();
+  if (expParam.TestSet.TestType == "Alternado") {
+    teste.beginChanger();
+  }
   componentB.score++;
   score.info = "Pontuação: " + componentA.score + componentB.score;
   document.getElementById("scoreText").innerHTML =
     "Pontuação: " + (componentA.score + componentB.score);
   componentB.posViCount();
   console.log(
-    "Você coletou pontos! Pontos totals: " +
+    "Você coletou pontos! Pontos totais: " +
       (componentA.score + componentB.score)
   );
   document.getElementById("myModalB").style.display = "none";
 };
-teste.beginChanger();
 score.scoreShow(score.showInterval, "pos", componentA, teste.compChange);
 
 componentA.posViCount();
@@ -107,6 +122,7 @@ while (index < expParam.StagesSet.NumberOfStages) {
   setTimeout(function() {
     var window = remote.getCurrentWindow();
     if (index >= expParam.StagesSet.NumberOfStages) {
+      report.storageComps(componentA, componentB);
       report.makeReport(expParam, componentA, componentB);
       window.close();
     } else {
