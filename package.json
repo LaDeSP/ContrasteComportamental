@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "jspdf": "^1.5.3"
+  },
   "devDependencies": {
     "electron": "^6.0.7",
     "electron-builder": "^21.2.0",
-    "electron-packager": "^14.0.6"
+    "electron-packager": "^14.2.1"
   },
   "scripts": {
     "start": "electron ."
