@@ -94,3 +94,11 @@ body {
     opacity: 1;
   }
 }
+
+/*Evita a seleção e movimentação dos elementos na tela*/
+*, *::after, *::before {
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+	cursor: default;
+}
