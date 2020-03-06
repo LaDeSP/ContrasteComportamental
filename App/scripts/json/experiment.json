@@ -2,8 +2,8 @@
     "ID":"0",
     "TrainingTime" : "180000",
     "TestSet" : {
-        "TestType" : "Concorrente",
-        "TestTime" : "6000",
+        "TestType" : "Alternado",
+        "TestTime" : "60000",
         "CollectTime": "5000",
         "COD" : "1000",
         "ICI" : "1500",
